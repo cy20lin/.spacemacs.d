@@ -1,0 +1,24 @@
+#+TITLE: Welcome to the fantastic world of Spacemacs 
+#+AUTHOR: ChienYu Lin
+#+EMAIL: cy20lin@google.com
+
+* About 
+my personal configuration for [[http://spacemacs.org/][Spacemacs]] 
+
+* Quick start
+** Install
+#+BEGIN_SRC shell
+  git clone https://github.com/cy20lin/.spacemacs.d ~/.spacemacs.d 
+#+end_src
+
+* Features
+** C, C++, CMake 
+- =CMakeList.txt= is now recognized by =projectile= as a project root file
+- use hotkey =SPC c C=, =SPC c r= to configure project in cmake-mode
+- use =SPC c C=, =SPC c r= to compile project in c-mode or c++-mode
+- auto setup flags (per file) for flycheck, no more =#include <header.hpp>= not found
+  - use flags in =compile_commands.json= (if found) for flycheck
+  - guess flags for flycheck (if =compile_commands.json= not found)
+
+** NeoTree
+- use =SPC f o= to open specified file in external app
