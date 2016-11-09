@@ -1,4 +1,5 @@
-#+TITLE: Welcome to the fantastic world of Spacemacs 
+#+TITLE: Wow, Spacemacs !?
+#+SUBTITILE: welcome to the fantastic world of Spacemacs
 #+AUTHOR: ChienYu Lin
 #+EMAIL: cy20lin@google.com
 
