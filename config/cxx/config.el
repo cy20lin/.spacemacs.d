@@ -261,6 +261,7 @@
 (defvar my-cxx-c-header-extensions
   (list
    ".h"
+   ".def"
    ))
 (defvar my-cxx-c++-source-extensions
   (list
@@ -276,7 +277,6 @@
    ".hh"
    ".hxx"
    ".ixx"
-   ".def"
    ))
 
 (defun my-cxx--guess-default-flags (filename &optional major-mode-)
@@ -335,12 +335,12 @@
 ;;     (set (make-local-variable 'flycheck-clang-args) flags)))
 
 (defun my-cxx--c-c++-compile-command ()
-  (format "cd \"%s\" && cmake --build build --target all --config Release" (projectile-project-root))
+  (if (projectile-project-p) (format "cd \"%s\" && cmake --build build --target all --config Release" (projectile-project-root)))
   )
 
 (defun my-cxx--cmake-compile-command ()
-  (format "cd \"%s\" && ( test ! -e ./build || rm -rf ./build ) && mkdir build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -G\"Ninja\" -H. -Bbuild && ~/.spacemacs.d/tools/normalize-path.sh ./build/compile_commands.json"
-          (projectile-project-root) my-user-spacemacs-directory))
+  (if (projectile-project-p) (format "cd \"%s\" && ( test ! -e ./build || rm -rf ./build ) && mkdir build && cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -G\"Ninja\" -H. -Bbuild && ~/.spacemacs.d/tools/normalize-path.sh ./build/compile_commands.json"
+          (projectile-project-root) my-user-spacemacs-directory)))
 
 (defun my-cxx-setup-local-commands ()
   (case major-mode
