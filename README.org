@@ -20,6 +20,10 @@ my personal configuration for [[http://spacemacs.org/][Spacemacs]]
 - auto setup flags (per file) for flycheck, no more =#include <header.hpp>= not found
   - use flags in =compile_commands.json= (if found) for flycheck
   - guess flags for flycheck (if =compile_commands.json= not found)
+- use [[https://github.com/Sarcasm/irony-mode][irony]] for =syntax-checking= and =auto-completion= if possible
 
 ** NeoTree
 - use =SPC f o= to open specified file in external app
+
+* Screenshots
+[[file:doc/img/screenshot-c++-1.png]]
