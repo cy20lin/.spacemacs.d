@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
-;; Author:  <Vengis@VENGIS-PC>
+;; Author: ChienYu Lin <cy20lin@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -65,7 +65,8 @@ Each entry is either:
 ;; (setq irony-mode-excluded-packages
 ;;       '(auto-complete-clang))
 (defun my-irony-install-server ()
-  ""
+  "install irony-server"
+  (interactive)
   (let* ((build-dir (or irony-server-build-dir
                         (concat
                          (file-name-as-directory temporary-file-directory)

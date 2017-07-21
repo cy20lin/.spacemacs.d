@@ -13,6 +13,10 @@ my personal configuration for [[http://spacemacs.org/][Spacemacs]]
 #+end_src
 
 * Features
+** Generic
+- Add supports for [[https://github.com/syohex/emacs-quickrun][quickrun]] 
+- use =SPC o r r= to quickrun current file
+- use =SPC o r R= to quickrun the selected region and replace that region with outputs
 ** C, C++, CMake 
 - =CMakeList.txt= is now recognized by =projectile= as a project root file
 - use hotkey =SPC c C=, =SPC c r= to configure project in cmake-mode
