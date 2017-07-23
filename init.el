@@ -49,8 +49,8 @@ values."
      ;; Languages
      ;; spell-checking
      ;; (syntax-checking :variables
-                      ;; syntax-checking-enable-tooltips nil
-                      ;; )
+     ;; syntax-checking-enable-tooltips nil
+     ;; )
      (auto-completion :variables
                       ;; auto-completion-enable-help-tooltip t
                       ;; auto-completion-enable-sort-by-usage t
@@ -307,8 +307,18 @@ values."
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
+   ;; Control line numbers activation.
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
+   ;; This variable can also be set to a property list for finer control:
+   ;; '(:relative nil
+   ;;   :disabled-for-modes dired-mode
+   ;;                       doc-view-mode
+   ;;                       markdown-mode
+   ;;                       org-mode
+   ;;                       pdf-view-mode
+   ;;                       text-mode
+   ;;   :size-limit-kb 1000)
    ;; (default nil)
    dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.

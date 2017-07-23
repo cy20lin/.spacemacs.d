@@ -39,58 +39,6 @@
 ;; hack to make buffer editable
 (defun spacemacs//my-ide-quickrun-enable-edit ()
   "enable edit output buffer of quickrun"
-  (message "run enable edit hook")
+  ;; (message "quickrun done")
   (with-current-buffer (get-buffer quickrun--buffer-name)
     (read-only-mode -1)))
-
-
-;; quickrun commands
-(quickrun-add-command "javascript/wscript"
-  '((:command . "wscript")
-    (:exec . "%c //e:jscript %o %s %a")
-    (:cmdopt . "//Nologo")
-    (:description . "Run Javascript file with wscript"))
-  :mode 'javascript-mode)
-
-(quickrun-add-command "vbscript/wscript"
-  '((:command . "wscript")
-    (:exec . "%c //e:vbscript %o %s %a")
-    (:cmdopt . "//Nologo")
-    (:description . "Run Vbscript file with wscript"))
-  :mode 'visual-basic-mode)
-
-(quickrun-add-command "vbscript/cscript"
-  '((:command . "cscript")
-    (:exec . "%c //e:vbscript %o %s %a")
-    (:cmdopt . "//Nologo")
-    (:description . "Run Vbscript file with cscript"))
-  :devault "vbscript"
-  :mode 'visual-basic-mode)
-
-(quickrun-add-command "cmd"
-  '((:command . "cmd")
-    (:exec . "%c //e %s %a")
-    (:description . "Run batch file with cmd"))
-  :default "cmd"
-  :mode 'dos-mode)
-
-(quickrun-add-command "bat"
-  '((:command . "cmd")
-    (:exec . "%c //c %s %a")
-    (:description . "Run batch file with cmd"))
-  :default "bat"
-  :mode 'dos-mode)
-
-(quickrun-add-command "lisp/ecl"
-  '((:command . "ecl")
-    (:exec . "%c --shell %s %a")
-    (:description . "Run Lisp file with ecl"))
-  :default "lisp"
-  :mode 'lisp-mode)
-
-(quickrun-add-command "cmake"
-  '((:command . "cmake")
-    (:exec . "%c %o -P %s %a")
-    (:description . "Run CMake script"))
-  :default "cmake"
-  :mode 'cmake-mode)

@@ -94,5 +94,48 @@ Each entry is either:
       ;;   "rA" 'anything-quickrun
       ;;   "re" 'quickrun-eval-print
       ;;   "ra" 'quickrun-autorun-mode)
-      )))
+      ;; quickrun commands
+      (quickrun-add-command "javascript/wscript"
+                            '((:command . "wscript")
+                              (:exec . "%c //e:jscript %o %s %a")
+                              (:cmdopt . "//Nologo")
+                              (:description . "Run Javascript file with wscript"))
+                            :mode 'javascript-mode)
+      (quickrun-add-command "vbscript/wscript"
+                            '((:command . "wscript")
+                              (:exec . "%c //e:vbscript %o %s %a")
+                              (:cmdopt . "//Nologo")
+                              (:description . "Run Vbscript file with wscript"))
+                            :mode 'visual-basic-mode)
+      (quickrun-add-command "vbscript/cscript"
+                            '((:command . "cscript")
+                              (:exec . "%c //e:vbscript %o %s %a")
+                              (:cmdopt . "//Nologo")
+                              (:description . "Run Vbscript file with cscript"))
+                            :default "vbscript"
+                            :mode 'visual-basic-mode)
+      (quickrun-add-command "cmd"
+                            '((:command . "cmd")
+                              (:exec . "%c //e %s %a")
+                              (:description . "Run batch file with cmd"))
+                            :default "cmd"
+                            :mode 'dos-mode)
+      (quickrun-add-command "bat"
+                            '((:command . "cmd")
+                              (:exec . "%c //c %s %a")
+                              (:description . "Run batch file with cmd"))
+                            :default "bat"
+                            :mode 'dos-mode)
+      (quickrun-add-command "lisp/ecl"
+                            '((:command . "ecl")
+                              (:exec . "%c --shell %s %a")
+                              (:description . "Run Lisp file with ecl"))
+                            :default "lisp"
+                            :mode 'lisp-mode)
+      (quickrun-add-command "cmake"
+                            '((:command . "cmake")
+                              (:exec . "%c %o -P %s %a")
+                              (:description . "Run CMake script"))
+                            :default "cmake"
+                            :mode 'cmake-mode))))
 ;; packages.el ends here
