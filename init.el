@@ -31,78 +31,17 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     my-ide
-     windows-scripts
-     octave
-     yaml
-     pdf-tools
-     html
-     python
-     javascript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
-     better-defaults
-     ;; Languages
-     ;; spell-checking
-     ;; (syntax-checking :variables
-     ;; syntax-checking-enable-tooltips nil
-     ;; )
-     (auto-completion :variables
-                      ;; auto-completion-enable-help-tooltip t
-                      ;; auto-completion-enable-sort-by-usage t
-                      ;; auto-completion-return-key-behavior nil            ; 'complete , nil
-                      ;; auto-completion-tab-key-behavior 'complete         ; 'complete , 'cycle , nil
-                      ;; auto-completion-complete-with-key-sequence nil
-                      ;; auto-completion-complete-with-key-sequence-delay 0.1
-                      ;; auto-completion-private-snippets-directory nil
-                      )
-     emacs-lisp
-     ;; haskell
-     shell-scripts
-     (c-c++ :variables
-            ;; c-c++-enable-clang-support t
-            c-c++-default-mode-for-headers 'c++-mode
-            )
-     ;; my-irony
-     ;; my-rtags
-     git
-     markdown
-     org
-     (colors :variables
-             colors-enable-rainbow-identifiers t
-             ;; options: 'all 'variables nil
-             ;; colors-colorize-identifiers 'all
-             ;; [NOTE]
-             ;; in msys2, `libxpm' is needed to show image
-             ;; use command: pacman -S ${MINGW_PACKAGE_PREFIX}-xpm-nox
-             colors-enable-nyan-cat-progress-bar t)
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(;; quickrun
-                                      ;; modern-cpp-font-lock
-                                      ;; rtags
-                                      ;; ac-rtags
-                                      ;; company-rtags
-                                      ;; flycheck-rtags
-                                      ;; helm-rtags
-                                      ;; ivy-rtags
-                                      ;; irony
-                                      ;; company-irony
-                                      ;; company-irony-c-headers
-                                      ;; irony-eldoc
-                                      ;; flycheck-irony
-                                      )
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -361,17 +300,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;; (set 'my-hostname       (shell-command-to-string "hostname | tr -d \'\\n\'"))
-  (set 'my-hostname       (getenv "HOSTNAME"))
-  (set 'my-username       (or (getenv "USERNAME") (getenv "USER")))
-  ;; (set 'my-drive-root     (file-truename "/"))       ;; e.g.
-  (set 'my-msyscon        (getenv "MSYSCON"))        ;; mitty.exe
-  (set 'my-msystem-chost  (getenv "MSYSTEM_CHOST"))  ;; i686-w64-mingw32, i686-pc-msys
-  (set 'my-msystem        (getenv "MSYSTEM"))        ;; MINGW32, MINGW64, MSYS
-  (set 'my-msystem-carch  (getenv "MSYSTEM_CARCH"))  ;; i686, x86_64 (same as uname -m)
-  (set 'my-msystem-prefix (file-name-as-directory (getenv "MSYSTEM_PREFIX"))) ;; drive:/path/to/msys/
-  (set 'my-msystem-home   (file-name-as-directory (getenv "HOME"))) ;;
-  (set 'my-user-spacemacs-directory (file-name-directory (dotspacemacs/location)))
   )
 
 (defun dotspacemacs/user-config ()
@@ -381,101 +309,4 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  ;; (global-flycheck-mode)
-  (global-company-mode)
-  ;; System locale to use for formatting time values.
-  (setq system-time-locale "C")         ; Make sure that the weekdays in the
-                                        ; time stamps of your Org mode files and
-                                        ; in the agenda appear in English.
-  (set 'c-default-style '((java-mode . "java")
-                          (awk-mode  . "awk")
-                          (c++-mode  . "stroustrup")
-                          (c-mode    . "k&r")
-                          (other     . "gnu")))
-  ;; [TODO] s-chop-left, s-chop-right are needed
-  (load-file (concat my-user-spacemacs-directory "config/cxx/config.el"))
-  (load-file (concat my-user-spacemacs-directory "config/msys/config.el"))
-  (spacemacs/declare-prefix "o" "custom")
-  (spacemacs/declare-prefix "mo" "custom")
-
-  ;; apply this patch to enable `SPC f o' to open file in external app in neotree
-  (defun spacemacs/open-file-or-directory-in-external-app (arg)
-    "Open current file in external application.
-If the universal prefix argument is used then open the folder
-containing the current file by the default explorer."
-    (interactive "P")
-    (if arg
-        (spacemacs//open-in-external-app (expand-file-name default-directory))
-      ;;- (let ((file-path (if (derived-mode-p 'dired-mode)
-      ;;-                      (dired-get-file-for-visit)
-      ;;-                    buffer-file-name)))
-      ;;- (eq major-mode 'neotree-mode)
-      (let ((file-path (cond ((derived-mode-p 'dired-mode) (dired-get-file-for-visit))
-                             ((derived-mode-p 'neotree-mode) (or (neo-buffer--get-filename-current-line) neo-buffer--start-node))
-                             (t (buffer-file-name)))))
-        (if file-path
-            (spacemacs//open-in-external-app file-path)
-          (message "No file associated to this buffer.")))))
-  ;; (modern-c++-font-lock-global-mode t)
-  ;; (setq default-buffer-file-coding-system 'utf-8-unix)
   )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#272822" "#F92672" "#A6E22E" "#E6DB74" "#66D9EF" "#FD5FF0" "#A1EFE4" "#F8F8F2"])
- '(compilation-message-face (quote default))
- '(fci-rule-color "#20240E" t)
- '(highlight-changes-colors (quote ("#FD5FF0" "#AE81FF")))
- '(highlight-tail-colors
-   (quote
-    (("#20240E" . 0)
-     ("#679A01" . 20)
-     ("#4BBEAE" . 30)
-     ("#1DB4D0" . 50)
-     ("#9A8F21" . 60)
-     ("#A75B00" . 70)
-     ("#F309DF" . 85)
-     ("#20240E" . 100))))
- '(magit-diff-use-overlays nil)
- '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
- '(package-selected-packages
-   (quote
-    (quickrun powershell ivy-rtags ivy helm-rtags flycheck-rtags company-rtags ac-rtags rtags modern-cpp-font-lock solarized-theme zenburn-theme yaml-mode pdf-tools tablist web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data irony-eldoc flycheck-irony company-irony-c-headers company-irony irony insert-shebang hide-comnt company-quickhelp rainbow-mode rainbow-identifiers color-identifiers-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic fish-mode company-shell flycheck-pos-tip pos-tip flycheck smeargle orgit org-projectile org-present org org-pomodoro alert log4e gntp org-download mwim mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md evil-magit magit magit-popup git-commit with-editor disaster company-statistics company-c-headers company cmake-mode clang-format auto-yasnippet yasnippet ac-ispell auto-complete ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async quelpa package-build spacemacs-theme)))
- '(pos-tip-background-color "#A6E22E")
- '(pos-tip-foreground-color "#272822")
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#F92672")
-     (40 . "#CF4F1F")
-     (60 . "#C26C0F")
-     (80 . "#E6DB74")
-     (100 . "#AB8C00")
-     (120 . "#A18F00")
-     (140 . "#989200")
-     (160 . "#8E9500")
-     (180 . "#A6E22E")
-     (200 . "#729A1E")
-     (220 . "#609C3C")
-     (240 . "#4E9D5B")
-     (260 . "#3C9F79")
-     (280 . "#A1EFE4")
-     (300 . "#299BA6")
-     (320 . "#2896B5")
-     (340 . "#2790C3")
-     (360 . "#66D9EF"))))
- '(vc-annotate-very-old-color nil)
- '(weechat-color-list
-   (unspecified "#272822" "#20240E" "#F70057" "#F92672" "#86C30D" "#A6E22E" "#BEB244" "#E6DB74" "#40CAE4" "#66D9EF" "#FB35EA" "#FD5FF0" "#74DBCD" "#A1EFE4" "#F8F8F2" "#F8F8F0")))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
