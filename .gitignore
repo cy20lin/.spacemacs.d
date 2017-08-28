@@ -1,2 +1,5 @@
 .*
 !.gitignore
+# Skip custom.el in worktree
+# git update-index --skip-worktree
+/custom.el

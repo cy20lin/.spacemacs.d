@@ -30,12 +30,84 @@ values."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   `(
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     ;; +lang/
+     (c-c++ :variables
+            ;; enable clang support if clang is found
+            c-c++-enable-clang-support (executable-find "clang")
+            c-c++-default-mode-for-headers 'c++-mode
+            )
+     emacs-lisp
+     javascript
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     ;; go
+     python
+     yaml
+     ;; haskell
+     html
+     windows-scripts
+     ;; asm
+     csv
+     ;; latex
+     lua
+     octave
+     ;; restructured-text
+     markdown
+     org
+     ;; +tools/
+     ;; pdf-tools
+     ;; +intl/
+     ;; chinese
+     ;; +tags/
+     ;; cscope
+     ,(when (executable-find "gtags") 'gtags)
+     ;; +syn
+     helm
+     ;; +emacs/
+     better-defaults
+     ;; +checkers/
+     ;; spell-checking
+     (syntax-checking :variables
+                      ;; syntax-checking-enable-tooltips nil
+                      )
+     ;; +compilation/
+     (auto-completion :variables
+                      ;; auto-completion-enable-help-tooltip t
+                      ;; auto-completion-enable-sort-by-usage t
+                      ;; auto-completion-return-key-behavior nil            ; 'complete , nil
+                      ;; auto-completion-tab-key-behavior 'complete         ; 'complete , 'cycle , nil
+                      ;; auto-completion-complete-with-key-sequence nil
+                      ;; auto-completion-complete-with-key-sequence-delay 0.1
+                      ;; auto-completion-private-snippets-directory nil
+                      )
+     ;; +fun/
+     games
+     ;; +source-control/
+     git
+     ;; version-control
+     ;; ----------------------------------------------------------------
+     ;; private layers here
+     ;; ----------------------------------------------------------------
+     ;; (colors :variables
+     ;;         colors-enable-rainbow-identifiers t
+     ;;         colors-enable-nyan-cat-progress-bar t
+     ;;         )
+     (my-colors :variables
+                my-colors-enable-rainbow-identifiers t
+                my-colors-enable-nyan-cat-progress-bar t
+                )
+     my-irony
+     my-ide
+     my-c-c++
+     ;; my-msystem
+     ;; my-rtags
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -300,6 +372,21 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; Set custom-file to custom.el to avoid this init.el be populated by
+  ;; auto generated custom variable configs.
+  (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+  ;; Load configs files in .spacemacs.d/config/<config-dir>/
+  (when (and (eq system-type 'windows-nt) (getenv "MSYSTEM"))
+    (let ((tmp (getenv "TMPDIR")))
+          (when tmp
+            (setq-default temporary-file-directory tmp)
+            (message "(User) temporary-file-directory set to: %s" temporary-file-directory)
+            )))
+  (let ((init-files
+         ;; Add your init files here (relative to `dotspacemacs-directory')
+         '()))
+    (dolist (file init-files)
+      (load-file (expand-file-name file dotspacemacs-directory))))
   )
 
 (defun dotspacemacs/user-config ()
@@ -309,4 +396,35 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  ;; Load configs files in .spacemacs.d/config/<config-dir>/
+  (let ((config-files
+         ;; Add your config files here (relative to `dotspacemacs-directory')
+         '("configs/patch/config.el")))
+    (dolist (file config-files)
+      (load-file (expand-file-name file dotspacemacs-directory))))
+  ;; Enable global flycheck mode if you need it
+  ;; (global-company-mode)
+  ;; Enable caching for projectile porject,
+  ;; it default value is nil in Windows,
+  ;; so enable it no matter what OS we use.
+  (setq projectile-enable-caching t)
+  ;; Make sure that the weekdays in the
+  ;; time stamps of your Org mode files and
+  ;; in the agenda appear in English.
+  (setq system-time-locale "C")
+  ;;
+  (setq warning-minimum-level :error)
+  ;; declare coustom leader key
+  (spacemacs/declare-prefix "o" "custom")
+  (spacemacs/declare-prefix "mo" "custom")
+  (spacemacs/set-leader-keys "ps" 'helm-multi-swoop-projectile)
+  ;;
+  (setq c-default-style '((java-mode . "java")
+                          (awk-mode  . "awk")
+                          (c++-mode  . "stroustrup")
+                          (c-mode    . "k&r")
+                          (other     . "gnu")))
+  ;; (modern-c++-font-lock-global-mode t)
+  (setq-default buffer-file-coding-system 'utf-8-unix)
+  (setq projectile-project-compilation-dir "build")
   )
