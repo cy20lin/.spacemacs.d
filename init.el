@@ -70,6 +70,7 @@ values."
      ,(when (executable-find "gtags") 'gtags)
      ;; +syn
      helm
+     ;; ivy
      ;; +emacs/
      better-defaults
      ;; +checkers/
@@ -95,14 +96,11 @@ values."
      ;; ----------------------------------------------------------------
      ;; private layers here
      ;; ----------------------------------------------------------------
-     ;; (colors :variables
-     ;;         colors-enable-rainbow-identifiers t
-     ;;         colors-enable-nyan-cat-progress-bar t
-     ;;         )
      (my-colors :variables
-                my-colors-enable-rainbow-identifiers t
+                ;; my-colors-colorize-identifiers 'all
                 my-colors-enable-nyan-cat-progress-bar t
                 )
+     my-icons
      my-irony
      my-ide
      my-c-c++

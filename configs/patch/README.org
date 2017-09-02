@@ -8,6 +8,9 @@ Patches for emacs and spacemacs.
 
 * Patched functions
 
-| ~spacemacs/open-file-or-directory-in-external-app~ | Apply this patch to enable `SPC f o' to open file in external app in neotree |
-| ~server-ensure-safe-dir~                           | Workaround for MSYS2 MSYS-Shell                                              |
+- spacemacs/open-file-or-directory-in-external-app :: 
+ Apply this patch to enable =SPC f o= to open file in external app in neotree.
+
+- server-ensure-safe-dir :: 
+ Workaround for MSYS2 MSYS-Shell.
 

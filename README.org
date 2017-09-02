@@ -4,6 +4,23 @@
 #+AUTHOR: ChienYu Lin
 #+EMAIL: cy20lin@google.com
 
+My [[http://spacemacs.org/][Spacemacs]] configs.
+
+* Quick start
+
+  Install [[http://spacemacs.org/][Spacemacs]] configuration files.
+
+  #+BEGIN_SRC shell
+  git clone https://github.com/cy20lin/.spacemacs.d ~/.spacemacs.d
+  #+end_src TOC links should be GitHub style anchors.
+
+* Table of Contents                                        :TOC_4_gh:noexport:
+- [[#quick-start][Quick start]]
+- [[#directory-structure][Directory structure]]
+- [[#configs][Configs]]
+- [[#layers][Layers]]
+- [[#screenshots][Screenshots]]
+
 * Directory structure
 
   #+BEGIN_SRC
@@ -41,11 +58,11 @@
 
   Though, if the configs are complicate, it is advised to group them
   into a folder under =configs/= directory with initialization codes in
-  =init.el= and configuration codes in =config.el=. They would be loaded
+  =init.el= and configuration codes in =config.el=. Then load the codes
   in the functions =dotspacemacs/user-init= and =dotspacemacs/user-config=
   respectively.
 
-  - [[./configs/patches/README.org][patch]]
+  - [[./configs/patch/README.org][patch]]
 
 * Layers
 
@@ -53,6 +70,11 @@
 
   - [[./layers/my-c-c++/README.org][my-c/c++]]
   - [[./layers/my-colors/README.org][my-colors]]
+  - [[./layers/my-icons/README.org][my-icons]]
   - [[./layers/my-irony/README.org][my-irony]]
   - [[./layers/my-ide/README.org][my-ide]]
   - [[./layers/my-msystem/README.org][my-msystem]]
+
+* Screenshots
+
+  [[./doc/img/screenshot-c++-1.png]]
