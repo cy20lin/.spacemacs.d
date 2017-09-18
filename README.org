@@ -68,12 +68,14 @@ My [[http://spacemacs.org/][Spacemacs]] configs.
 
   All private layers are prefixed with =my-= before its name.
 
-  - [[./layers/my-c-c++/README.org][my-c/c++]]
+  - [[./layers/my-blog/README.org][my-blog]]
+  - [[./layers/my-c-c++/README.org][my-c-c++]]
   - [[./layers/my-colors/README.org][my-colors]]
   - [[./layers/my-icons/README.org][my-icons]]
   - [[./layers/my-irony/README.org][my-irony]]
   - [[./layers/my-ide/README.org][my-ide]]
   - [[./layers/my-msystem/README.org][my-msystem]]
+  - [[./layers/my-rtags/README.org][my-rtags]]
 
 * Screenshots
 

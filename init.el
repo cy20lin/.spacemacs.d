@@ -37,6 +37,7 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; +lang/
+     ;; NOTE: maybe make c-c++ layer be depended by my-c-c++ layer
      (c-c++ :variables
             ;; enable clang support if clang is found
             c-c++-enable-clang-support (executable-find "clang")
@@ -67,10 +68,10 @@ values."
      ;; chinese
      ;; +tags/
      ;; cscope
+     ;; NOTE: maybe make gtags layer be depended by my-c-c++ layer
      ,(when (executable-find "gtags") 'gtags)
      ;; +syn
      helm
-     ;; ivy
      ;; +emacs/
      better-defaults
      ;; +checkers/
@@ -96,14 +97,25 @@ values."
      ;; ----------------------------------------------------------------
      ;; private layers here
      ;; ----------------------------------------------------------------
+     ;; (colors :variables
+     ;;         colors-enable-rainbow-identifiers t
+     ;;         colors-enable-nyan-cat-progress-bar t
+     ;;         )
      (my-colors :variables
-                ;; my-colors-colorize-identifiers 'all
+                my-colors-enable-rainbow-identifiers t
                 my-colors-enable-nyan-cat-progress-bar t
                 )
      my-icons
      my-irony
-     my-ide
+     (my-ide :variables
+             my-ide-global-aide-mode-by-default t)
      my-c-c++
+     (my-blog :variables
+              blog-admin-backend-type 'hexo
+              blog-admin-backend-new-post-in-drafts t
+              blog-admin-backend-new-post-with-same-name-dir t
+              blog-admin-backend-path "~/blog"
+              )
      ;; my-msystem
      ;; my-rtags
      )
@@ -376,13 +388,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Load configs files in .spacemacs.d/config/<config-dir>/
   (when (and (eq system-type 'windows-nt) (getenv "MSYSTEM"))
     (let ((tmp (getenv "TMPDIR")))
-          (when tmp
-            (setq-default temporary-file-directory tmp)
-            (message "(User) temporary-file-directory set to: %s" temporary-file-directory)
-            )))
+      (when tmp
+        (setq-default temporary-file-directory tmp)
+        (message "(User) temporary-file-directory set to: %s" temporary-file-directory)
+        )))
   (let ((init-files
          ;; Add your init files here (relative to `dotspacemacs-directory')
-         '()))
+         '("configs/patch/init.el")))
     (dolist (file init-files)
       (load-file (expand-file-name file dotspacemacs-directory))))
   )
@@ -415,7 +427,14 @@ you should place your code here."
   ;; declare coustom leader key
   (spacemacs/declare-prefix "o" "custom")
   (spacemacs/declare-prefix "mo" "custom")
-  (spacemacs/set-leader-keys "ps" 'helm-multi-swoop-projectile)
+  ;;
+  (when (configuration-layer/package-usedp 'helm)
+    (spacemacs/set-leader-keys "ps" 'helm-multi-swoop-projectile))
+  ;;
+  (defun my-switch-to-message-bufffer ()
+    (interactive)
+    (spacemacs/goto-buffer-workspace "*Messages*"))
+  (spacemacs/set-leader-keys "bM" 'my-switch-to-message-bufffer)
   ;;
   (setq c-default-style '((java-mode . "java")
                           (awk-mode  . "awk")
@@ -424,5 +443,6 @@ you should place your code here."
                           (other     . "gnu")))
   ;; (modern-c++-font-lock-global-mode t)
   (setq-default buffer-file-coding-system 'utf-8-unix)
+  (c-set-offset 'innamespace 0)
   (setq projectile-project-compilation-dir "build")
   )

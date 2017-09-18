@@ -142,18 +142,14 @@ Each entry is either:
     (progn
       (when my-ide-global-aide-mode-by-default (global-aide-mode)))))
 
-(defun my-ide/init-names ()
-  (use-package names
-    :init nil
-    :config nil
-    ))
-
 (defun my-ide/pre-init-aide ()
   (spacemacs|use-package-add-hook aide
     :pre-config
     (progn
       (when (configuration-layer/package-usedp 'quickrun)
-        (spacemacs/declare-prefix-for-mode 'aide-mode "r" "run")
+        ;; NOTE: spacemacs/declare-prefix-for-mode MODE should be major-mode
+        ;; (spacemacs/declare-prefix-for-mode 'aide-mode "mr" "run")
+        (spacemacs/declare-prefix "mr" "run")
         (spacemacs/set-leader-keys-for-minor-mode 'aide-mode
           "rr" 'quickrun
           "rR" 'quickrun-region

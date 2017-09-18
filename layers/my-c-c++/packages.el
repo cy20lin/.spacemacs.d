@@ -69,14 +69,14 @@ Each entry is either:
     :config nil))
 
 (defun my-c-c++/pre-init-projectile ()
-  (message "pre-init-projectile configs for cmake")
+  ;; (message "pre-init-projectile configs for cmake")
   (spacemacs|use-package-add-hook projectile
     :pre-config
     (progn
       (add-to-list 'projectile-project-root-files-top-down-recurring "CMakeLists.txt"))))
 
 (defun my-c-c++/pre-init-aide ()
-  (message "pre-init-aide")
+  ;; (message "pre-init-aide")
   (spacemacs|use-package-add-hook aide
     :pre-config
     (aide-register-project-type
