@@ -32,7 +32,8 @@
 (defconst my-blog-packages
   '((blog-admin :location (recipe
                            :fetcher github
-                           :repo "CodeFalling/blog-admin"))
+                           :repo "cy20lin/blog-admin" :branch "cy20lin/master"))
+                           ;; :repo "CodeFalling/blog-admin"))
     aide
     )
   "The list of Lisp packages required by the my-blog layer.
