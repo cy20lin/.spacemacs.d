@@ -2,7 +2,7 @@
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
-;; Author:  <pclin@DESKTOP-A9NDFVV>
+;; Author: ChienYu Lin <cy20lin@gmail.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -96,7 +96,11 @@ Each entry is either:
       (add-hook 'c-mode-hook 'my-c-c++//enable-irony-mode-if-server-found)
       (add-hook 'c++-mode-hook 'my-c-c++//enable-irony-mode-if-server-found)
       (with-eval-after-load "irony-cdb"
-        (add-to-list 'irony-cdb-compilation-databases 'my-c-c++-cdb-guess t))
-      )))
+        ;; (add-to-list 'irony-cdb-compilation-databases 'my-c-c++-cdb-guess t)
+        (setq irony-cdb-compilation-databases '(my-c-c++-cdb-guess))
+        ;; (setq irony-cdb-compilation-databases '(my-c-c++-cdb-guess irony-cdb-clang-complete irony-cdb-json))
+        ;; (add-to-list 'irony-cdb-compilation-databases 'my-c-c++-cdb-guess t)
+        (setq irony-additional-clang-options
+              `("-std=c++17" . ,irony-additional-clang-options))))))
 
 ;;; packages.el ends here

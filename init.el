@@ -189,7 +189,7 @@ values."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
    ;; (default nil)
-   dotspacemacs-startup-lists '(projects recents)
+   dotspacemacs-startup-lists '(projects recents bookmarks agenda todos)
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -431,10 +431,15 @@ you should place your code here."
   (when (configuration-layer/package-usedp 'helm)
     (spacemacs/set-leader-keys "ps" 'helm-multi-swoop-projectile))
   ;;
-  (defun my-switch-to-message-bufffer ()
+  (defun my-switch-to-message-buffer ()
     (interactive)
     (spacemacs/goto-buffer-workspace "*Messages*"))
-  (spacemacs/set-leader-keys "bM" 'my-switch-to-message-bufffer)
+  (spacemacs/set-leader-keys "bM" 'my-switch-to-message-buffer)
+  (setq-default my-org-entry-file "~/org/README.org")
+  (defun my-find-org-entry-file ()
+    (interactive)
+    (find-file my-org-entry-file))
+  (spacemacs/set-leader-keys "oo" 'my-find-org-entry-file)
   ;;
   (setq c-default-style '((java-mode . "java")
                           (awk-mode  . "awk")

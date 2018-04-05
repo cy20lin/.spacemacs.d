@@ -35,10 +35,10 @@
 (defconst my-irony-packages
   '(
     ;; irony-eldoc
-   (irony :location (recipe :fetcher github :repo Sarcasm/irony-mode))
-   (company-irony :location (recipe :fetcher github :repo Sarcasm/company-irony))
-   company-irony-c-headers
-   flycheck-irony
+    (irony :location (recipe :fetcher github :repo Sarcasm/irony-mode))
+    (company-irony :location (recipe :fetcher github :repo Sarcasm/company-irony))
+    company-irony-c-headers
+    flycheck-irony
     )
   "The list of Lisp packages required by the my-irony layer.
 

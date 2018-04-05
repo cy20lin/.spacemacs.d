@@ -34,8 +34,8 @@
         (my-c-c++-cdb-guess--add-prefix-foreach
          "-I"
          (if (string-equal source-dir build-dir)
-             (list source-dir)
-           (list build-dir source-dir))))))
+             (list source-dir (f-join source-dir "include") (f-join source-dir "src"))
+           (list build-dir source-dir (f-join source-dir "include") (f-join source-dir "src")))))))
 
 (defcustom my-c-c++-cdb-guess-guess-handlers
  (list
