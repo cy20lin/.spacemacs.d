@@ -38,30 +38,57 @@ values."
      ;; ----------------------------------------------------------------
      ;; +lang/
      ;; NOTE: maybe make c-c++ layer be depended by my-c-c++ layer
+     ;; dependencies: python, git, python3
+     (treemacs :variables
+               treemacs-use-follow-mode t
+               treemacs-use-filewatch-mode t
+               ;; treemacs-use-collapsed-directories 3
+               ;; treemacs-use-git-mode 'simple
+               )
+     lsp
      (c-c++ :variables
             ;; enable clang support if clang is found
             c-c++-enable-clang-support (executable-find "clang")
             c-c++-default-mode-for-headers 'c++-mode
             )
+     ;; dependencies: cmake
+     cmake
+     ;; dependencies: cquery
+     cquery
      emacs-lisp
-     javascript
+     ;; * Setup javascript layer
+     ;; pacboy -S nodejs:x npm:x
+     ;; npm install -g tern js-beautify eslint
+     (javascript :variables
+                 javascript-disable-tern-port-files nil
+                 ;; tern-command '("node" "/path/to/tern/bin/tern")
+                 js2-basic-offset 4
+                 js-indent-level 4
+                 ;; (setq-default js2-basic-offset 2)
+                 ;; (setq-default js-indent-level 2)
+                 )
      (shell :variables
             shell-default-height 30
-            shell-default-position 'bottom)
+            shell-default-position 'bottom
+            )
      ;; go
-     python
-     yaml
+     (python :variables
+             ;; python-shell-interpreter ,(if (executable-find "python3") "python3" "python")
+             ;; flycheck-python-pycompile-executable "python3"
+             python-backend 'lsp
+             )
+     ;; yaml
      ;; haskell
-     html
-     windows-scripts
+     ;; html
+     ;; windows-scripts
      ;; asm
-     csv
+     ;; csv
      ;; latex
-     lua
-     octave
+     ;; lua
+     ;; octave
      ;; restructured-text
-     markdown
-     org
+     ;; markdown
+     ;; org
      ;; +tools/
      ;; pdf-tools
      ;; +intl/
@@ -90,7 +117,7 @@ values."
                       ;; auto-completion-private-snippets-directory nil
                       )
      ;; +fun/
-     games
+     ;; games
      ;; +source-control/
      git
      ;; version-control
@@ -106,16 +133,16 @@ values."
                 my-colors-enable-nyan-cat-progress-bar t
                 )
      my-icons
-     my-irony
-     (my-ide :variables
-             my-ide-global-aide-mode-by-default t)
-     my-c-c++
-     (my-blog :variables
-              blog-admin-backend-type 'hexo
-              blog-admin-backend-new-post-in-drafts t
-              blog-admin-backend-new-post-with-same-name-dir t
-              blog-admin-backend-path "~/blog"
-              )
+     ;; my-irony
+     ;; (my-ide :variables
+     ;;         my-ide-global-aide-mode-by-default t)
+     ;; my-c-c++
+     ;; (my-blog :variables
+     ;;          blog-admin-backend-type 'hexo
+     ;;          blog-admin-backend-new-post-in-drafts t
+     ;;          blog-admin-backend-new-post-with-same-name-dir t
+     ;;          blog-admin-backend-path "~/blog"
+     ;;          )
      ;; my-msystem
      ;; my-rtags
      )
@@ -201,6 +228,7 @@ values."
    ;;                       spacemacs-light)
    ;; have a look at http://themegallery.robdor.com/
    dotspacemacs-themes '(
+                         darkokai
                          monokai
                          zenburn
                          solarized-dark
@@ -218,7 +246,8 @@ values."
                                :size 16
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.1
+                               )
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -412,8 +441,19 @@ you should place your code here."
          '("configs/patch/config.el")))
     (dolist (file config-files)
       (load-file (expand-file-name file dotspacemacs-directory))))
+  ;; Customize the powerline separator. Possible values are
+  ;; `alternate', `arrow', `arrow-fade', `bar', `box', `brace',
+  ;; `butt', `chamfer', `contour', `curve', `curve', `rounded',
+  ;; `rounded', `roundstub', `slant', `wave', `zigzag', `nil'
+  (setq powerline-default-separator nil)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-version-control-off)
+  ;; (setq nyan-bar-length 32)
+  (setq-default python-shell-interpreter
+                (if (executable-find "python3") "python3" "python"))
   ;; Enable global flycheck mode if you need it
-  ;; (global-company-mode)
+  (global-flycheck-mode)
+  (global-company-mode)
   ;; Enable caching for projectile porject,
   ;; it default value is nil in Windows,
   ;; so enable it no matter what OS we use.
