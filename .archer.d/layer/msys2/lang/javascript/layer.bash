@@ -1,13 +1,9 @@
 layer_help() {
-    echo "/"
+    echo "lang/javascript"
 }
 
 layer_metadata() {
     LAYER_DEPENDENCIES=(
-        app/spacemacs
-        lang/c-c++
-        lang/javascript
-        lang/python
     )
 }
 
@@ -16,7 +12,7 @@ layer_is_installed() {
 }
 
 layer_install() {
-    pacman -S mingw-w64-x86_64-nodejs --needed
+    pacman -S --needed --noconfirm mingw-w64-x86_64-nodejs
     npm install -g tern js-beautify eslint
 
     echo '{'                        >~/.tern-config

@@ -4,14 +4,12 @@ layer_help() {
 
 layer_metadata() {
     LAYER_DEPENDENCIES=(
-        app/spacemacs
-        lang/javascript
-        lang/python
+        .
     )
 }
 
 layer_is_installed() {
-    false
+    true
 }
 
 layer_install() {

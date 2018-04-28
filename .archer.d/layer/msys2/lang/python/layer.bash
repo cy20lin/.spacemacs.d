@@ -20,9 +20,9 @@ layer_install() {
     python-language-server \
     pyls-isort \
     pyls-mypy \
-    pythonstyle \
-    python-flake8 \
-    python-pylint \
+    pycodestyle \
+    flake8 \
+    pylint \
     importmagic \
     epc
 }
