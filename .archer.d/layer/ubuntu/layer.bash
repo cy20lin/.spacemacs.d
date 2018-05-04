@@ -4,13 +4,10 @@ layer_help() {
 
 layer_metadata() {
     LAYER_DEPENDENCIES=(
-        app/gcc
-        app/clang
-        app/llvm
-        app/cmake
-        app/global
-        # app/irony-server
-        # app/rtags
+        app/spacemacs
+        lang/c-c++
+        lang/javascript
+        lang/python
     )
 }
 

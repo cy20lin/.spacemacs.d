@@ -11,6 +11,7 @@ layer_metadata() {
         app/global
         # app/irony-server
         # app/rtags
+        # app/cquery
     )
 }
 
