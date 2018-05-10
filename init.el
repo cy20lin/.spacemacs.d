@@ -46,15 +46,22 @@ values."
                ;; treemacs-use-git-mode 'simple
                )
      lsp
+     (my-irony :variables
+               ;;
+               )
+     (my-ide :variables
+             my-ide-global-aide-mode-by-default t)
      (c-c++ :variables
             ;; enable clang support if clang is found
-            c-c++-enable-clang-support (executable-find "clang")
+            c-c++-enable-irony-support (executable-find "irony-server")
+            ;; c-c++-enable-clang-support (executable-find "clang")
             c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-c++11 t
             )
      ;; dependencies: cmake
      cmake
      ;; dependencies: cquery
-     cquery
+     ;; cquery
      emacs-lisp
      ;; * Setup javascript layer
      ;; pacboy -S nodejs:x npm:x
@@ -133,9 +140,6 @@ values."
                 my-colors-enable-nyan-cat-progress-bar t
                 )
      my-icons
-     ;; my-irony
-     ;; (my-ide :variables
-     ;;         my-ide-global-aide-mode-by-default t)
      ;; my-c-c++
      ;; (my-blog :variables
      ;;          blog-admin-backend-type 'hexo
@@ -143,7 +147,7 @@ values."
      ;;          blog-admin-backend-new-post-with-same-name-dir t
      ;;          blog-admin-backend-path "~/blog"
      ;;          )
-     ;; my-msystem
+     ,(when (getenv "MSYSTEM") 'my-msystem)
      ;; my-rtags
      )
    ;; List of additional packages that will be installed without being
@@ -489,5 +493,8 @@ you should place your code here."
   ;; (modern-c++-font-lock-global-mode t)
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (c-set-offset 'innamespace 0)
+  ;; in layer c-c++
+  ;; spacemacs//c-toggle-auto-newline
+  ;; (c-toggle-auto-newline 1)
   (setq projectile-project-compilation-dir "build")
   )

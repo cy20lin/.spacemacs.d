@@ -8,10 +8,14 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v /mingw64/bin/clang
+    command -v /mingw64/bin/clang /mingw64/bin/llvm-config clang-format
 }
 
 layer_install() {
     pacman -S --needed --noconfirm \
-           mingw-w64-x86_64-clang
+           mingw-w64-x86_64-clang \
+           mingw-w64-x86_64-llvm \
+           mingw-w64-x86_64-clang-analyzer \
+           mingw-w64-x86_64-clang-tools-extra
+
 }

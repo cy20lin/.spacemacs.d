@@ -1,5 +1,5 @@
 layer_help() {
-    echo "app/emacs"
+    echo "app/rtags"
 }
 
 layer_metadata() {

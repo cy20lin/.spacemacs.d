@@ -34,11 +34,11 @@
 
 (defconst my-irony-packages
   '(
-    ;; irony-eldoc
-    (irony :location (recipe :fetcher github :repo Sarcasm/irony-mode))
-    (company-irony :location (recipe :fetcher github :repo Sarcasm/company-irony))
-    company-irony-c-headers
-    flycheck-irony
+    (irony-eldoc :location (recipe :fetcher github :repo "ikirill/irony-eldoc" :commit "0df5831eaae264a25422b061eb2792aadde8b3f2")) ;; Don’t spam irony if there were no candidates the first time.
+    (irony :location (recipe :fetcher github :repo "Sarcasm/irony-mode" :commit "aa74ed4d0e50202384526c705fc71b23088f42c9")) ;; Make guess-flags choose the largest directory prefix
+    (company-irony :location (recipe :fetcher github :repo "Sarcasm/company-irony" :commit "52aca45bcd0f2cb0648fcafa2bbb4f8ad4b2fee7")) ;; Release 1.1.0
+    (company-irony-c-headers :location (recipe :fetcher github :repo "hotpxl/company-irony-c-headers" :commit "72c386aeb079fb261d9ec02e39211272f76bbd97")) ;; [master] Change readme.
+    (flycheck-irony :location (recipe :fetcher github :repo "cy20lin/flycheck-irony" :commit "1981712a7fefc8fc456e8499cdd1e49b01d7fbcf")) ;; Use executable-find instead of file-exists-p
     )
   "The list of Lisp packages required by the my-irony layer.
 
@@ -78,8 +78,20 @@ Each entry is either:
         (define-key irony-mode-map [remap complete-symbol] 'irony-completion-at-point-async))
       (add-hook 'irony-mode-hook 'my-irony/irony-mode-hook)
       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-      )
-    :config nil))
+      (with-eval-after-load 'irony
+        (when (configuration-layer/package-used-p 'irony)
+          (let* ((server-path (executable-find (expand-file-name "bin/irony-server" irony-server-install-prefix))))
+            (if (not server-path)
+                (let* ((exe (executable-find "irony-server"))
+                       (exe-dir (directory-file-name (file-name-directory exe)))
+                       (is-valid-prefix (string= "bin" (file-name-nondirectory exe-dir)))
+                       (prefix (if is-valid-prefix (directory-file-name (file-name-directory exe-dir)))))
+                  (if prefix (setq-default irony-server-install-prefix prefix))))))
+        ;; (message "iorny-server-install-prefix : %S" irony-server-install-prefix)
+        irony-server-install-prefix
+        ))
+    :config nil
+    ))
 
 (defun my-irony/init-company-irony ()
   (use-package company-irony
@@ -92,8 +104,8 @@ Each entry is either:
     :init
     (progn
       ;; (eval-after-load 'company '(add-to-list 'company-backends 'company-irony))
-      ;; (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
-      ;; (add-hook 'irony-mode-hook 'company-mode)
+      (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+      (add-hook 'irony-mode-hook 'company-mode)
       (push 'company-irony company-backends-c-mode-common)
       (spacemacs|use-package-add-hook irony
         :post-config (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)))

@@ -1,6 +1,10 @@
-(require 'my-c-c++-cdb-guess-header)
-(require 'my-c-c++-cdb-guess)
-(require 'my-c-c++-cdb-json)
+(require 'cl-lib)
+(require 'json)
+
+(defun my-c-c++-cdb-json (command &rest args)
+  (cl-case command
+    (get-compile-options (my-c-c++-cdb-json--get-compile-options))
+    (get-file-compile-options (my-c-c++-cdb-json--get-file-compile-options))))
 
 (defun my-c-c++--make-realtive-paths-in-flags-absolute (flags working-dir &optional options)
   ""
@@ -28,4 +32,10 @@
 
 ;; (cy-cdb--make-realtive-paths-in-flags-absolute '("-I./a" "-b" "asdf" "-I" "a" "-Ixxx") "d:/iiiii")
 
-(provide 'my-c-c++-cdb)
+;;
+;; private functions
+;;
+
+(defun my-c-c++-cdb-json--get-compile-options ())
+
+(provide 'my-c-c++-cdb-json)

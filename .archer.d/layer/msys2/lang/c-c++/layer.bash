@@ -9,7 +9,8 @@ layer_metadata() {
         app/llvm
         app/cmake
         app/global
-        # app/irony-server
+        app/irony-server
+        app/cquery
         # app/rtags
     )
 }

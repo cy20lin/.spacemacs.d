@@ -30,7 +30,8 @@
 ;;; Code:
 
 (defconst my-msystem-packages
-  '()
+  '((cygwin-mount :location local)
+    )
   "The list of Lisp packages required by the my-msystem layer.
 
 Each entry is either:
@@ -58,5 +59,9 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
+(defun my-msystem/init-cygwin-mount ()
+  (use-package cygwin-mount
+    :init (with-eval-after-load 'cygwin-mount (cygwin-mount-activate))
+    :config nil))
 
 ;;; packages.el ends here

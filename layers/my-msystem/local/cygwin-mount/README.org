@@ -1,0 +1,4 @@
+
+* Note
+  cygwin-mount.el is taken from following URL
+  https://www.emacswiki.org/emacs/cygwin-mount.el

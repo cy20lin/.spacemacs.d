@@ -41,6 +41,7 @@
  (list
   #'my-c-c++-cdb-guess-system-include-from-exec-path
   #'my-c-c++-cdb-guess-user-include-from-projectile
+  #'my-c-c++-cdb-guess-language-standard-flag
   )
  "List of guess handlers"
  )

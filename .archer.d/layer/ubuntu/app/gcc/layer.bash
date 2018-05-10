@@ -1,5 +1,5 @@
 layer_help() {
-    echo "app/emacs"
+    echo "app/gcc"
 }
 
 layer_metadata() {

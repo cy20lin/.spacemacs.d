@@ -14,7 +14,10 @@ layer_is_installed() {
 }
 
 layer_install() {
-    git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d/
+    if test ! -e ~/.emacs.d/
+    then
+        git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d/
+    fi
     pushd ~/.emacs.d/
     git checkout 0fa3658cd8e283825dcd0a54ce1579dec55eb568
     popd

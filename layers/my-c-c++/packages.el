@@ -31,7 +31,7 @@
 
 (defconst my-c-c++-packages
   `(
-    (my-c-c++ :location local)
+    ;; (my-c-c++ :location local)
     projectile
     irony
     aide
@@ -63,10 +63,10 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun my-c-c++/init-my-c-c++ ()
-  (use-package my-c-c++
-    :init nil
-    :config nil))
+;; (defun my-c-c++/init-my-c-c++ ()
+;;   (use-package my-c-c++
+;;     :init nil
+;;     :config nil))
 
 (defun my-c-c++/pre-init-projectile ()
   ;; (message "pre-init-projectile configs for cmake")
@@ -100,7 +100,7 @@ Each entry is either:
         (setq irony-cdb-compilation-databases '(my-c-c++-cdb-guess))
         ;; (setq irony-cdb-compilation-databases '(my-c-c++-cdb-guess irony-cdb-clang-complete irony-cdb-json))
         ;; (add-to-list 'irony-cdb-compilation-databases 'my-c-c++-cdb-guess t)
-        (setq irony-additional-clang-options
-              `("-std=c++17" . ,irony-additional-clang-options))))))
+        (setq irony-additional-clang-options `("-std=c++17" . ,irony-additional-clang-options))
+        ))))
 
 ;;; packages.el ends here

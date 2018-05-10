@@ -1,5 +1,5 @@
 layer_help() {
-    echo "app/ggtags"
+    echo "app/global"
 }
 
 layer_metadata() {
