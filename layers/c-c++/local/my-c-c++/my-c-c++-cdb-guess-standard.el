@@ -113,8 +113,8 @@
 
 (defun my-c-c++-cdb-guess-gcc-standard-flag (&optional mode)
   (let ((mode (or mode major-mode)))
-    (cond ((eq mode 'c++-mode) (concat "-std=" (my-c-c++-cdb-find-clang++-language-standard)))
-          ((eq mode 'c-mode) (concat "-std=" (my-c-c++-cdb-find-clang-language-standard)))
+    (cond ((eq mode 'c++-mode) (concat "-std=" (my-c-c++-cdb-find-g++-language-standard)))
+          ((eq mode 'c-mode) (concat "-std=" (my-c-c++-cdb-find-gcc-language-standard)))
           (t nil))))
 
 (defun my-c-c++-cdb-guess-clang-standard (&optional mode)

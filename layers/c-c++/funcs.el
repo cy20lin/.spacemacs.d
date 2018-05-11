@@ -125,7 +125,6 @@ and the arguments for flyckeck-clang based on a project-specific text file."
            (include-flags (my-c-c++-cdb-guess-compiler-include-flags))
            )
       (if include-flags (setq flags (append flags include-flags)))
-      (message "set c++ flags : %S" flags)
       (setq-local company-clang-arguments flags)
       (setq-local flycheck-clang-args flags)
       (setq-local flycheck-gcc-args flags) ;; ++
@@ -134,8 +133,11 @@ and the arguments for flyckeck-clang based on a project-specific text file."
       (add-to-list 'company-clang-arguments (my-c-c++-cdb-guess-clang-standard-flag) t)
       (when (configuration-layer/package-used-p 'irony)
         ;; (add-to-list 'irony-cdb-compilation-databases #'my-c-c++-cdb-guess)
-        (setq iorny-additional-clang-options (append irony-additional-clang-options flags))
+        ;; (make-variable-buffer-local 'irony-additional-clang-options)
+        ;; (setq-local iorny-additional-clang-options (append irony-additional-clang-options flags (my-c-c++-cdb-guess-clang-standard-flag)))
+        (setq-local irony-additional-clang-options (append irony-additional-clang-options flags))
         (add-to-list 'irony-additional-clang-options (my-c-c++-cdb-guess-clang-standard-flag) t)
+        (message "set iorny additional flags : %S" irony-additional-clang-options)
         )
       (setq-local company-c-headers-path-user
                   (append '(".")

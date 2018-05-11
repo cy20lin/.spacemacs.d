@@ -99,5 +99,16 @@
 ;; * useful references
 ;; eshell-parse-command
 ;; https://github.com/emacs-china/hello-emacs/blob/master/Emacs中的shell--Eshell使用笔记.org
+;; https://www.ibm.com/developerworks/cn/linux/l-cn-emacs-shell/index.html
+;; http://www.hawkwithwind.net/blog/2013/06/24/emacs-cygwin-again/
+;; https://cygwin.com/ml/cygwin/2012-05/msg00114.html
+;; https://stackoverflow.com/questions/690266/why-cant-i-use-job-control-in-a-bash-script
+;; https://www.webascender.com/blog/getting-know-shells-job-control-features/
+;; process-connection-type
+;; term-ptyp
+;;
+;; TODO:
+;; * Patch function locate-file-internal, used from executable-find
+;;
 
 ;;; msystem.el ends here
