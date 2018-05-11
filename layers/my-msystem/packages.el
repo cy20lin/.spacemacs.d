@@ -30,7 +30,10 @@
 ;;; Code:
 
 (defconst my-msystem-packages
-  '((cygwin-mount :location local)
+  '(
+    (cygwin-mount :location local)
+    (msystem :location local)
+    eshell
     )
   "The list of Lisp packages required by the my-msystem layer.
 
@@ -63,5 +66,14 @@ Each entry is either:
   (use-package cygwin-mount
     :init (with-eval-after-load 'cygwin-mount (cygwin-mount-activate))
     :config nil))
+
+(defun my-msystem/init-msystem ()
+  (use-package msystem
+    :init (with-eval-after-load 'msystem (msystem-setup-advice))
+    :config nil))
+
+(defun my-msystem/post-init-eshell ()
+  (spacemacs|use-package-add-hook eshell
+    :post-config (msystem-setup-eshell)))
 
 ;;; packages.el ends here

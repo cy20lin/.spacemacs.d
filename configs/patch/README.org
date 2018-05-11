@@ -16,3 +16,10 @@ Patches for emacs and spacemacs.
 
 - spacemacs/declare-prefix ::
  Declare prefix for major-mode-leader too                                     |
+
+* TODO 
+
+* Reference
+ https://emacs.stackexchange.com/questions/16809/override-a-function-locally-but-allow-calls-to-the-original-function
+ ftp://ftp.gnu.org/old-gnu/Manuals/elisp-manual-21-2.8/html_chapter/elisp_17.html
+https://emacs.stackexchange.com/questions/16809/override-a-function-locally-but-allow-calls-to-the-original-function

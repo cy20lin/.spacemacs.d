@@ -24,5 +24,10 @@ layer_install() {
     flake8 \
     pylint \
     importmagic \
-    epc
+    epc \
+    autopep8 \
+    yapf \
+    rope \
+    pydocstyle
+
 }

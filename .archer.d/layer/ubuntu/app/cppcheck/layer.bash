@@ -1,5 +1,5 @@
 layer_help() {
-    echo "app/clang"
+    echo "app/cppcheck"
 }
 
 layer_metadata() {
@@ -8,9 +8,9 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v clang
+    command -v cppcheck
 }
 
 layer_install() {
-    sudo apt-get install -y clang
+    sudo apt-get install -y cppcheck
 }

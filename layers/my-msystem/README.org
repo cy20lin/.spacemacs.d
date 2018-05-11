@@ -11,7 +11,9 @@
 
 * Description
 This layer does wonderful things:
-  - thing01
+  - resolve msys2-style-path command in eshell, (e.g. //bin/bash, //usr/bin/cmake )/
+  - shebang msys2-style-path resolving in eshell
+  - TODO resolving msys2-style-path arguments
 
 * Install
 To use this configuration layer, add it to your =~/.spacemacs=. You will need to

@@ -1,4 +1,4 @@
-﻿;;; cygwin-mount.el --- Teach EMACS about cygwin styles and mount points.
+;;; cygwin-mount.el --- Teach EMACS about cygwin styles and mount points.
 
 ;; Copyright (C) 1997 Michael Cook <mcook@xemacs.org>.
 ;;               2001 Klaus Berndl <berndl@sdm.de>
