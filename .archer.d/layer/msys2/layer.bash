@@ -1,9 +1,10 @@
 layer_help() {
-    echo "/"
+    echo "/msys2"
 }
 
 layer_metadata() {
     LAYER_DEPENDENCIES=(
+        app/fakecygpty
         app/spacemacs
         lang/c-c++
         lang/javascript
