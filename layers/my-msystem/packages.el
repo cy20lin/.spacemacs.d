@@ -33,6 +33,7 @@
   '(
     (cygwin-mount :location local)
     (msystem :location local)
+    (fakecygpty :location (recipe :fetcher github :repo "d5884/fakecygpty" :commit "80e55da7f3292601653f0d77a6eb1b8b0f28f064")) ;; Fix copyright years.
     eshell
     )
   "The list of Lisp packages required by the my-msystem layer.
@@ -64,13 +65,20 @@ Each entry is either:
 
 (defun my-msystem/init-cygwin-mount ()
   (use-package cygwin-mount
-    :init (with-eval-after-load 'cygwin-mount (cygwin-mount-activate))
-    :config nil))
+    :init nil
+    :config (cygwin-mount-activate)))
 
 (defun my-msystem/init-msystem ()
   (use-package msystem
-    :init (with-eval-after-load 'msystem (msystem-setup-advice))
-    :config nil))
+    :init nil
+    :config (progn
+              (msystem-setup-advice)
+              (msystem-setup-eshell))))
+
+(defun my-msystem/init-fakecygpty ()
+  (use-package msystem
+    :init nil
+    :config (fakecygpty-activate)))
 
 (defun my-msystem/post-init-eshell ()
   (spacemacs|use-package-add-hook eshell
