@@ -79,7 +79,8 @@
         ;; (setq irony-cdb-compilation-databases '(my-c-c++-cdb-guess))
         ;; (setq irony-cdb-compilation-databases '(c-c++-cdb-guess irony-cdb-clang-complete irony-cdb-json))
         ;; (add-to-list 'irony-cdb-compilation-databases 'c-c++-cdb-guess t)
-        (setq irony-additional-clang-options `("-std=c++17" . ,irony-additional-clang-options))))))
+        ;; (setq irony-additional-clang-options `("-std=c++17" . ,irony-additional-clang-options))
+        ))))
 
 (defun c-c++/init-cc-mode ()
   (use-package cc-mode
