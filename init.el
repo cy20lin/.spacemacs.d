@@ -57,6 +57,7 @@ values."
             ;; c-c++-enable-clang-support (executable-find "clang")
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-c++11 t
+            c-c++-enable-rtags-support (executable-find "rdm")
             )
      ;; dependencies: cmake
      cmake
@@ -154,7 +155,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(ox-rst)
+   dotspacemacs-additional-packages '(
+                                      ox-rst
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.

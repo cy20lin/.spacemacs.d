@@ -1,5 +1,5 @@
 layer_help() {
-    echo "app/cmake"
+    echo "app/make"
 }
 
 layer_metadata() {
@@ -8,9 +8,9 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v cmake
+    command -v make
 }
 
 layer_install() {
-    sudo apt-get install -y cmake
+    sudo apt-get install -y make
 }

@@ -1,5 +1,5 @@
 layer_help() {
-    echo "app/emacs"
+    echo "app/ninja"
 }
 
 layer_metadata() {
@@ -8,9 +8,9 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v llvm-config
+    command -v ninja
 }
 
 layer_install() {
-    sudo apt-get install -y llvm
+    sudo apt-get install -y ninja
 }

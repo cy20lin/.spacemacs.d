@@ -8,7 +8,11 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v node npm && test -f ~/.eslintrc.json && test -f ~/.tern-config
+    command -v node &&
+    command -v npm &&
+    command -v tern &&
+    test -f ~/.eslintrc.json &&
+    test -f ~/.tern-config
 }
 
 layer_install() {
@@ -17,7 +21,7 @@ layer_install() {
     sudo apt-get install -y nodejs-legacy
     sudo apt-get install -y npm
     sudo apt-get install -y build-essential
-    # npm install -g tern js-beautify eslint
+    sudo npm install -g tern js-beautify eslint
 
     echo '{'                        >~/.tern-config
     echo '    "plugins": {'         >>~/.tern-config
@@ -25,8 +29,8 @@ layer_install() {
     echo '        "es_modules": {}' >>~/.tern-config
     echo '    },'                   >>~/.tern-config
     echo '    "libs": ['            >>~/.tern-config
-    echo '        "ecma5",'         >>~/.tern-config
-    echo '        "ecma6"'          >>~/.tern-config
+    # echo '        "ecma5",'         >>~/.tern-config
+    # echo '        "ecma6"'          >>~/.tern-config
     echo '    ],'                   >>~/.tern-config
     echo '    "ecmaVersion": 6'     >>~/.tern-config
     echo '}'                        >>~/.tern-config

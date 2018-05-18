@@ -6,10 +6,10 @@ layer_metadata() {
     LAYER_DEPENDENCIES=(
         app/gcc
         app/clang
-        app/llvm
         app/cmake
         app/global
         app/irony-server
+        app/make
         # app/rtags
         # app/cquery
     )

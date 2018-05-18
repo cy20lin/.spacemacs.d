@@ -1,16 +1,12 @@
-layer_help() {
-    echo "app/cmake"
-}
-
 layer_metadata() {
     LAYER_DEPENDENCIES=(
+        font/source-code-pro
     )
 }
 
 layer_is_installed() {
-    command -v cmake
+    true
 }
 
 layer_install() {
-    sudo apt-get install -y cmake
 }

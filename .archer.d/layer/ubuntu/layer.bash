@@ -8,6 +8,7 @@ layer_metadata() {
         lang/c-c++
         lang/javascript
         lang/python
+        font
     )
 }
 
