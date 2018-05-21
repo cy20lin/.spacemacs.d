@@ -4,6 +4,7 @@ layer_help() {
 
 layer_metadata() {
     LAYER_DEPENDENCIES=(
+        base
         app/spacemacs
         lang/c-c++
         lang/javascript
