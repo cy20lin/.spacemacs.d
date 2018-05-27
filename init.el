@@ -62,7 +62,7 @@ values."
      ;; dependencies: cmake
      cmake
      ;; dependencies: cquery
-     ;; cquery
+     ,(when (executable-find "cquery") 'cquery)
      emacs-lisp
      ;; * Setup javascript layer
      ;; pacboy -S nodejs:x npm:x

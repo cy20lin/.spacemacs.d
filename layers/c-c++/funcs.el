@@ -99,7 +99,6 @@ system and supports it, else returns a default set of include paths."
       (my-c-c++-cdb-guess-compiler-include-dirs)
       )))
 ;; (mapcar (function expand-file-name) (spacemacs//c-c++-get-standard-include-paths "c++"))
-
 (defun spacemacs//filter-and-substring (flags filter-prefix substr-index)
   "Returns all the strings in FLAGS starting with FILTER-PREFIX. The returned
 strings are substringed from SUBSTR-INDEX inclusive to the end of the string."
@@ -107,6 +106,15 @@ strings are substringed from SUBSTR-INDEX inclusive to the end of the string."
           (remove-if-not (lambda (f) (string-prefix-p filter-prefix f))
                          flags)))
 ;; (expand-file-name "/")
+
+(defun c-c++//split-compound-flags (flags)
+  (let ((new-flags nil))
+    (dolist (flag flags)
+      (cond
+       ((and (not (s-equals-p "-isystem" flag)) (s-starts-with-p "-isystem" flag)) (setq new-flags (append new-flags (list "-isystem" (s-chop-prefix "-isystem" flag)))))
+       (t (setq new-flags (append new-flags (list flag))))))
+    new-flags))
+
 (defun spacemacs/c-c++-load-clang-args ()
   "Sets the arguments for company-clang, the system paths for company-c-headers
 and the arguments for flyckeck-clang based on a project-specific text file."
@@ -136,7 +144,8 @@ and the arguments for flyckeck-clang based on a project-specific text file."
         ;; (make-variable-buffer-local 'irony-additional-clang-options)
         ;; (setq-local iorny-additional-clang-options (append irony-additional-clang-options flags (my-c-c++-cdb-guess-clang-standard-flag)))
         ;; (message "set iorny additional flags : %S" irony-additional-clang-options)
-        (setq-local irony-additional-clang-options (append irony-additional-clang-options (cons (my-c-c++-cdb-guess-clang-standard-flag) flags)))
+        (setq-local irony-additional-clang-options (c-c++//split-compound-flags (append irony-additional-clang-options (cons (my-c-c++-cdb-guess-clang-standard-flag) flags))))
+        ;; (setq-local irony-additional-clang-options (append irony-additional-clang-options (cons (my-c-c++-cdb-guess-clang-standard-flag) flags)))
         ;; (setq-default irony-additional-clang-options nil)
         ;; (add-to-list 'irony-additional-clang-options (my-c-c++-cdb-guess-clang-standard-flag) t)
         ;; (message "set iorny additional flags : %S" irony-additional-clang-options)

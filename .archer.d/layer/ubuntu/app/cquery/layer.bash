@@ -22,14 +22,12 @@ layer_install() {
     mkdir -p /tmp/archer/build
     cp /tmp/archer/source/cquery /tmp/archer/build -R
     pushd /tmp/archer/build/cquery
-    git checkout v20180302
+    # git checkout v20180302
+    git checkout 94a1a5c9d1911e919da3f5ab085fa3b938854505 # Fix bad memory usage by partially reverting
     git submodule update --init
-    CXXFLAGS=-g \
-            sudo python3 ./waf configure build install \
-            --variant=system \
-            --variant=release \
-            --prefix=/usr/local \
-            # --clang-prefix=/usr/lib/clang/3.8
-            # --llvm-config=llvm-config \
+    mkdir build
+    cmake -Bbuild -H . -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+    cmake --build build
+    sudo cmake --build build --target install
     popd
 }
