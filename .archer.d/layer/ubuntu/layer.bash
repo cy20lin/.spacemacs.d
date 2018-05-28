@@ -1,5 +1,5 @@
 layer_help() {
-    echo "lang/c-c++"
+    true
 }
 
 layer_metadata() {

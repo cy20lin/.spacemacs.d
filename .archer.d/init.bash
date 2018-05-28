@@ -3,11 +3,11 @@ is_msys2() {
 }
 
 is_ubuntu() {
-    command -v apt-get
+    command -v apt-get 1>/dev/null
 }
 
 is_archlinux() {
-    command -v pacman
+    command -v pacman 1>/dev/null
 }
 
 dotarcher_init() {
