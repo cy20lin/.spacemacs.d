@@ -23,4 +23,12 @@ dotarcher_init() {
     else
         ARCHER_LAYER_PREFIX=/default
     fi
+    if test -z "${TMP}"
+    then
+        TMP=~/tmp
+    fi
+    if test -z "${ARCHER_TMP}"
+    then
+        ARCHER_TMP=~/tmp/archer
+    fi
 }
