@@ -8,7 +8,7 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v python3 && command -v pip3 && command -v pyls
+    command -v python3 && command -v pip3 # && command -v pyls
 }
 
 layer_install() {
