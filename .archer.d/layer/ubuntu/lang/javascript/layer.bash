@@ -16,13 +16,21 @@ layer_is_installed() {
 }
 
 layer_install() {
+    git clone https://github.com/nodesource/distributions /tmp/archer/source/nodejs/distributions
+    pushd /tmp/archer/source/nodejs/distributions
+    git checkout 1fb7fd56201760a62581b61ac2e51013c0c3766c
+    popd
+    sudo bash /tmp/archer/source/nodejs/distributions/deb/setup_10.x
     sudo apt-get update
     sudo apt-get install -y nodejs
     sudo apt-get install -y nodejs-legacy
     sudo apt-get install -y npm
     sudo apt-get install -y build-essential
-    sudo npm install -g tern js-beautify eslint
-
+    npm config set prefix /usr/local
+    sudo npm install -g node-gyp
+    sudo npm install -g tern
+    sudo npm install -g js-beautify
+    sudo npm install -g eslint
     echo '{'                        >~/.tern-config
     echo '    "plugins": {'         >>~/.tern-config
     echo '        "node": {},'      >>~/.tern-config

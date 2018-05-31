@@ -12,14 +12,15 @@ layer_is_installed() {
 }
 
 layer_install() {
-    sudo apt-get install -y python3 python3-pip python python-pip
-    pip3 install \
-    python-language-server \
-    pyls-isort \
-    pyls-mypy \
-    pycodestyle \
-    flake8 \
-    pylint \
-    importmagic \
-    epc
+    sudo apt-get install -y python3
+    sudo apt-get install -y python3-pip
+    sudo apt-get install -y python
+    sudo apt-get install -y python-pip
+    sudo -H pip3 install python-language-server
+    sudo -H pip3 install pyls-isort
+    sudo -H pip3 install pycodestyle
+    sudo -H pip3 install flake8
+    sudo -H pip3 install pylint
+    sudo -H pip3 install importmagic
+    sudo -H pip3 install epc
 }
