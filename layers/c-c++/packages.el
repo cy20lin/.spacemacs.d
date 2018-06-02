@@ -10,37 +10,71 @@
 ;;; License: GPLv3
 
 (setq c-c++-packages
-  '(
-    (my-c-c++ :location local)
-    cc-mode
-    disaster
-    clang-format
-    company
-    (company-c-headers :requires company)
-    (company-rtags :requires company rtags)
-    company-ycmd
-    flycheck
-    (flycheck-rtags :requires flycheck rtags)
-    gdb-mi
-    ggtags
-    counsel-gtags
-    google-c-style
-    helm-cscope
-    helm-gtags
-    (helm-rtags :requires helm rtags)
-    (ivy-rtags :requires ivy rtags)
-    rtags
-    realgud
-    semantic
-    srefactor
-    stickyfunc-enhance
-    ycmd
-    xcscope
-    ;;
-    projectile
-    (aide :require my-ide)
-    irony
-    ))
+      '(
+        (my-c-c++ :location local)
+        cc-mode
+        disaster
+        clang-format
+        company
+        (company-c-headers :requires company)
+        (company-rtags
+         :location (recipe
+                    :fetcher github
+                    :repo "Andersbakken/rtags"
+                    ;; Bump version to 2.18
+                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+                    :files ("src/company-rtags.el"))
+         :requires company rtags)
+        company-ycmd
+        flycheck
+        (flycheck-rtags
+         :location (recipe
+                    :fetcher github
+                    :repo "Andersbakken/rtags"
+                    ;; Bump version to 2.18
+                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+                    :files ("src/flycheck-rtags.el"))
+         :requires flycheck rtags)
+        gdb-mi
+        ggtags
+        counsel-gtags
+        google-c-style
+        helm-cscope
+        helm-gtags
+        (helm-rtags
+         :location (recipe
+                    :fetcher github
+                    :repo "Andersbakken/rtags"
+                    ;; Bump version to 2.18
+                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+                    :files ("src/helm-rtags.el"))
+         :requires helm rtags)
+        (ivy-rtags
+         :location (recipe
+                    :fetcher github
+                    :repo "Andersbakken/rtags"
+                    ;; Bump version to 2.18
+                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+                    :files ("src/ivy-rtags.el"))
+         :requires ivy rtags)
+        (rtags
+         :location (recipe
+                    :fetcher github
+                    :repo "Andersbakken/rtags"
+                    ;; Bump version to 2.18
+                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+                    :files ("src/rtags.el")))
+        realgud
+        semantic
+        srefactor
+        stickyfunc-enhance
+        ycmd
+        xcscope
+        ;;
+        projectile
+        (aide :require my-ide)
+        irony
+        ))
 
 (defun c-c++/init-my-c-c++ ()
   (use-package my-c-c++
@@ -74,13 +108,14 @@
           (if (executable-find "irony-server") (irony-mode))))
       (add-hook 'c-mode-hook 'c-c++//enable-irony-mode-if-server-found)
       (add-hook 'c++-mode-hook 'c-c++//enable-irony-mode-if-server-found)
-      (with-eval-after-load "irony-cdb"
-        ;; (add-to-list 'irony-cdb-compilation-databases 'c-c++-cdb-guess t)
-        ;; (setq irony-cdb-compilation-databases '(my-c-c++-cdb-guess))
-        ;; (setq irony-cdb-compilation-databases '(c-c++-cdb-guess irony-cdb-clang-complete irony-cdb-json))
-        ;; (add-to-list 'irony-cdb-compilation-databases 'c-c++-cdb-guess t)
-        ;; (setq irony-additional-clang-options `("-std=c++17" . ,irony-additional-clang-options))
-        ))))
+      ;; (with-eval-after-load "irony-cdb"
+      ;;   (add-to-list 'irony-cdb-compilation-databases 'c-c++-cdb-guess t)
+      ;;   (setq irony-cdb-compilation-databases '(my-c-c++-cdb-guess))
+      ;;   (setq irony-cdb-compilation-databases '(c-c++-cdb-guess irony-cdb-clang-complete irony-cdb-json))
+      ;;   (add-to-list 'irony-cdb-compilation-databases 'c-c++-cdb-guess t)
+      ;;   (setq irony-additional-clang-options `("-std=c++17" . ,irony-additional-clang-options))
+      ;;   )
+      )))
 
 (defun c-c++/init-cc-mode ()
   (use-package cc-mode
@@ -279,8 +314,8 @@
   (use-package google-c-style
     :if (or 'c-c++-enable-google-style 'c-c++-enable-google-newline)
     :config (progn
-    (when c-c++-enable-google-style (add-hook 'c-mode-common-hook 'google-set-c-style))
-    (when c-c++-enable-google-newline (add-hook 'c-mode-common-hook 'google-make-newline-indent)))))
+              (when c-c++-enable-google-style (add-hook 'c-mode-common-hook 'google-set-c-style))
+              (when c-c++-enable-google-newline (add-hook 'c-mode-common-hook 'google-make-newline-indent)))))
 
 (defun c-c++/post-init-semantic ()
   (spacemacs/add-to-hooks 'semantic-mode c-c++-mode-hooks))

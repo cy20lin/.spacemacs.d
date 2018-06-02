@@ -34,11 +34,37 @@
 
 (defconst my-irony-packages
   '(
-    (irony-eldoc :location (recipe :fetcher github :repo "ikirill/irony-eldoc" :commit "0df5831eaae264a25422b061eb2792aadde8b3f2")) ;; Don’t spam irony if there were no candidates the first time.
-    (irony :location (recipe :fetcher github :repo "Sarcasm/irony-mode" :commit "aa74ed4d0e50202384526c705fc71b23088f42c9")) ;; Make guess-flags choose the largest directory prefix
-    (company-irony :location (recipe :fetcher github :repo "Sarcasm/company-irony" :commit "52aca45bcd0f2cb0648fcafa2bbb4f8ad4b2fee7")) ;; Release 1.1.0
-    (company-irony-c-headers :location (recipe :fetcher github :repo "hotpxl/company-irony-c-headers" :commit "72c386aeb079fb261d9ec02e39211272f76bbd97")) ;; [master] Change readme.
-    (flycheck-irony :location (recipe :fetcher github :repo "cy20lin/flycheck-irony" :commit "1981712a7fefc8fc456e8499cdd1e49b01d7fbcf")) ;; Use executable-find instead of file-exists-p
+    (irony-eldoc
+     :location (recipe
+                :fetcher github
+                :repo "ikirill/irony-eldoc"
+                ;; Don’t spam irony if there were no candidates the first time.
+                :commit "0df5831eaae264a25422b061eb2792aadde8b3f2"))
+    (irony
+     :location (recipe
+                :fetcher github
+                :repo "Sarcasm/irony-mode"
+                ;; Make guess-flags choose the largest directory prefix
+                :commit "aa74ed4d0e50202384526c705fc71b23088f42c9"))
+    (company-irony
+     :location (recipe
+                :fetcher github
+                :repo "Sarcasm/company-irony"
+                ;; Release 1.1.0
+                :commit "52aca45bcd0f2cb0648fcafa2bbb4f8ad4b2fee7"))
+    (company-irony-c-headers
+     :location (recipe
+                :fetcher github
+                :repo "hotpxl/company-irony-c-headers"
+                ;; [master] Change readme.
+                :commit "72c386aeb079fb261d9ec02e39211272f76bbd97"))
+    (flycheck-irony
+     :location (recipe
+                :fetcher github
+                ;; :repo "Sarcasm/flycheck-irony" ;; origin-repo
+                :repo "cy20lin/flycheck-irony"
+                ;; Use executable-find instead of file-exists-p
+                :commit "1981712a7fefc8fc456e8499cdd1e49b01d7fbcf"))
     )
   "The list of Lisp packages required by the my-irony layer.
 
