@@ -37,8 +37,9 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ;; +lang/
-     ;; NOTE: maybe make c-c++ layer be depended by my-c-c++ layer
-     ;; dependencies: python, git, python3
+     ;; TODO:
+     ;; check emacs-version before including `treemacs' layer,
+     ;; major version should be 25+
      (treemacs :variables
                treemacs-use-follow-mode t
                treemacs-use-filewatch-mode t
@@ -254,6 +255,7 @@ values."
                                :weight normal
                                :width normal
                                :powerline-scale 1.1
+                               ;; :powerline-scale 1
                                )
    ;; The leader key
    dotspacemacs-leader-key "SPC"
@@ -433,6 +435,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
          '("configs/patch/init.el")))
     (dolist (file init-files)
       (load-file (expand-file-name file dotspacemacs-directory))))
+  ;; get modeline height, ref:
+  ;; https://stackoverflow.com/questions/9613026/how-to-get-the-height-of-the-emacs-mode-line
+  ;; https://stackoverflow.com/questions/9613026/how-to-get-the-height-of-the-emacs-mode-line
+  ;; (- (elt (window-pixel-edges) 3) (elt (window-inside-pixel-edges) 3))
+  ;; (spaceline-toggle-hud-off)
+  ;; Set line padding to 1, same as other line in editing area
+  (setq darkokai-mode-line-padding 1)
+  ;; Don't use hud now, it will make the height of mode-line inconsistent
+  (setq-default powerline-display-hud nil)
   )
 
 (defun dotspacemacs/user-config ()
@@ -500,4 +511,5 @@ you should place your code here."
   ;; spacemacs//c-toggle-auto-newline
   ;; (c-toggle-auto-newline 1)
   (setq projectile-project-compilation-dir "build")
+  (spaceline-toggle-hud-off)
   )
