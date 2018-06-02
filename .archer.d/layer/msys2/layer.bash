@@ -4,11 +4,12 @@ layer_help() {
 
 layer_metadata() {
     LAYER_DEPENDENCIES=(
-        app/fakecygpty
-        app/spacemacs
         lang/c-c++
         lang/javascript
         lang/python
+        app/fakecygpty
+        app/spacemacs
+        /generic/script/setup
     )
 }
 

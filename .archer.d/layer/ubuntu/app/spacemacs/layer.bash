@@ -18,4 +18,16 @@ layer_install() {
     pushd ~/.emacs.d/
     git checkout 0fa3658cd8e283825dcd0a54ce1579dec55eb568
     popd
+    # FIXME:
+    # How to gracefully kill-emacs and get the spacemacs bootstrap status,
+    # rather than running into following infomation, even if spacemacs is
+    # successfully bootstraped.
+    # Error: server did not start correctly
+    yes | emacs --daemon --eval '
+    (progn
+      (message "[INFO] End of installation.")
+      (setq dotspacemacs-enable-server nil)
+      (kill-emacs))
+    '
+    true # workaround for now
 }
