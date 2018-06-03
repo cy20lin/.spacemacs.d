@@ -63,7 +63,8 @@ values."
             ;; c-c++-enable-clang-support (executable-find "clang")
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-c++11 t
-            c-c++-enable-rtags-support (executable-find "rdm")
+            ;; c-c++-enable-rtags-support (executable-find "rdm")
+            c-c++-enable-rtags-support nil
             )
      ;; dependencies: cmake
      cmake
