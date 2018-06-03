@@ -281,7 +281,14 @@
           "gv" 'rtags-find-virtuals-at-point
           "gV" 'rtags-print-enum-value-at-point
           "gX" 'rtags-fix-fixit-at-point
-          "gY" 'rtags-cycle-overlays-on-screen)))))
+          "gY" 'rtags-cycle-overlays-on-screen)))
+    :config
+    (progn
+      (add-hook 'c-mode-hook 'rtags-start-process-unless-running t)
+      (add-hook 'c++-mode-hook 'rtags-start-process-unless-running t)
+      ;; (add-hook 'objc-mode-hook 'rtags-start-process-unless-running t)
+      )
+    ))
 
 (defun c-c++/init-realgud()
   (use-package realgud
