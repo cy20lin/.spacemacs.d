@@ -211,6 +211,8 @@ values."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
+   ;; NOTE: There are some issues using spacelpa:
+   ;; https://github.com/syl20bnr/spacemacs/issues/10438
    dotspacemacs-use-spacelpa nil
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
@@ -563,6 +565,17 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;;
+  (with-eval-after-load 'quelpa
+    ;; (add-to-list 'quelpa-melpa-recipe-stores (concat (file-name-as-directory dotspacemacs-directory) "recipes"))
+    )
+  ;; (with-eval-after-load 'use-package-ensure
+  ;;   ;; (setq use-package-ensure-function 'quelpa)
+  ;;   (defun my-tracing-function (name args state &optional no-refresh)
+  ;;     (message "==== ensure ==== %S %S %S" name args state))
+  ;;   (add-function :before (symbol-function 'use-package-ensure-elpa) #'my-tracing-function)
+  ;;   (setq use-package-always-ensure nil)
+  ;;   )
   ;; Set custom-file to custom.el to avoid this init.el be populated by
   ;; auto generated custom variable configs.
   (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
@@ -656,3 +669,39 @@ you should place your code here."
   (setq projectile-project-compilation-dir "build")
   (spaceline-toggle-hud-off)
   )
+
+;; TODO:
+;; how emacs install packages, i have to pin packages through quelpa
+;; use-package-ensure-function
+;; use-package-always-ensure
+;; init.el
+;; configuration-layer/load
+;;  + configuration-layer//install-packages
+;;    + configuration-layer/get-package
+;;      + configuration-layer--indexed-packages
+;;    + configuration-layer//install-package
+;;      + configuration-layer//install-from-recipe
+;;      + configuration-layer//install-from-epla
+;; + configuration-layer/create-elpa-repository
+;;   + configuration-layer//get-indexed-elpa-package-names
+;; (quelpa-get-melpa-recipe)
+;; (quelpa-package-install)
+;; (configuration-layer/get-package "flycheck")
+;; quelpa-melpa-recipe-stores
+
+;; use-package-ensure-function()
+;; (use-package-ensure-elpa)
+;; quelpa-use
+;; (quelpa)
+;; use-package-always-ensure
+;; package-archives
+;; quelpa-melpa-recipe-stores
+;; (with-temp-buffer
+;;   (setq-local quelpa-melpa-recipe-stores (concat (file-name-as-directory dotspacemacs-directory) "receipes"))
+;;   (quelpa-get-melpa-recipe "company")
+;;   )
+;; (quelpa)
+
+;; private local package issue, dotfile extra-packages :local option
+;; configuration-layer//configure-packages-2 (packages)
+;; + configuration-layer/get-location-directory

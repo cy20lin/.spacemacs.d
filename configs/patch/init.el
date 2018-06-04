@@ -21,6 +21,7 @@ LONG-NAME if given is stored in `spacemacs/prefix-titles'."
       (when (and is-major-mode-prefix dotspacemacs-major-mode-emacs-leader-key)
         (which-key-declare-prefixes major-mode-prefix-emacs prefix-name)))))
 
+
 ;; Patch this someday.
 ;; NOTE: Maybe we can start form these funcs and vars.
 ;; (spacemacs-bootstrap/init-which-key)
@@ -48,3 +49,66 @@ LONG-NAME if given is stored in `spacemacs/prefix-titles'."
 ;;   (while key
 ;;     (define-key spacemacs-default-map (kbd key) def)
 ;;     (setq key (pop bindings) def (pop bindings))))
+
+;;
+;; #3
+;;
+(defvar my-private-melpa-recipes-directory "~/.spacemacs.d/recipes")
+;; (concat (file-name-as-directory dotspacemacs-directory) "recipes")
+
+(defun my-configuration-layer//get-private-quelpa-recipe (name)
+  (with-temp-buffer
+    (setq-local quelpa-melpa-recipe-stores
+                (cond
+                 ((stringp my-private-melpa-recipes-directory) (list my-private-melpa-recipes-directory))
+                 ((listp my-private-melpa-recipes-directory) my-private-melpa-recipes-directory)
+                 (t nil)))
+    (quelpa-get-melpa-recipe name)))
+
+(defun my-configuration-layer//install-from-private-quelpa (pkg-name)
+  (let ((recipe (my-configuration-layer//get-private-quelpa-recipe name)))
+    (if recipe
+        (or (quelpa recipe) t))))
+
+(defun my-configuration-layer//install-from-private-quelpa-and-elpa (pkg-name)
+  "Install PKG from ELPA."
+  ;; (message "ELPA: %S" pkg-name)
+  (let ((recipe (my-configuration-layer//get-private-quelpa-recipe pkg-name)))
+    (if recipe
+        (with-temp-buffer
+          (setq-local quelpa-melpa-recipe-stores
+                      (cond
+                       ((stringp my-private-melpa-recipes-directory) (list my-private-melpa-recipes-directory))
+                       ((listp my-private-melpa-recipes-directory) my-private-melpa-recipes-directory)
+                       (t nil)))
+          ;; (message "package %S, with recipe %S" pkg-name recipe)
+          (quelpa recipe))
+      (configuration-layer//install-from-elpa pkg-name))))
+
+(defun configuration-layer//install-package (pkg)
+  "Unconditionally install the package PKG."
+  (let* ((layer (when pkg (car (oref pkg :owners))))
+         (location (when pkg (oref pkg :location)))
+         (min-version (when pkg (oref pkg :min-version))))
+    (spacemacs-buffer/replace-last-line
+     (format "--> installing %s: %s%s... [%s/%s]"
+             (if layer "package" "dependency")
+             pkg-name (if layer (format "@%S" layer) "")
+             installed-count not-inst-count) t)
+    (spacemacs//redisplay)
+    (unless (package-installed-p pkg-name min-version)
+      (condition-case-unless-debug err
+          (cond
+           ((or (null pkg) (eq 'elpa location))
+            (my-configuration-layer//install-from-private-quelpa-and-elpa pkg-name)
+            (when pkg (cfgl-package-set-property pkg :lazy-install nil)))
+           ((and (listp location) (eq 'recipe (car location)))
+            (configuration-layer//install-from-recipe pkg)
+            (cfgl-package-set-property pkg :lazy-install nil))
+           (t (configuration-layer//warning "Cannot install package %S."
+                                            pkg-name)))
+        ('error
+         (configuration-layer//error
+          (concat "\nAn error occurred while installing %s "
+                  "(error: %s)\n") pkg-name err)
+         (spacemacs//redisplay))))))
