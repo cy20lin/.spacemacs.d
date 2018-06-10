@@ -1,0 +1,1 @@
+(evil :repo "emacs-evil/evil" :fetcher github :files (:defaults (:exclude "evil-test-helpers.el")) :commit "230b87212c81aaa68ef5547a6b998d9c365fe139")

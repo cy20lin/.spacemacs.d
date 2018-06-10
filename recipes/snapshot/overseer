@@ -1,0 +1,1 @@
+(overseer :fetcher github :repo "tonini/overseer.el" :commit "02d49f582e80e36b4334c9187801c5ecfb027789")

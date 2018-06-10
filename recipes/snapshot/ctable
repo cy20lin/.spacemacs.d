@@ -1,0 +1,1 @@
+(ctable :repo "kiwanami/emacs-ctable" :fetcher github :files ("ctable.el") :commit "b8830d1ca95abb100a81bc32011bd17d5ecba000")

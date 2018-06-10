@@ -1,0 +1,1 @@
+(dash-functional :fetcher github :repo "magnars/dash.el" :files ("dash-functional.el") :commit "a74f4cfcdc8d0642a9f602ad494f0354f27dacc9")

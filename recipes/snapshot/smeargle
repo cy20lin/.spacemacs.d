@@ -1,0 +1,1 @@
+(smeargle :repo "syohex/emacs-smeargle" :fetcher github :commit "0665b1ff5109731898bc4a0ca6d939933b804777")

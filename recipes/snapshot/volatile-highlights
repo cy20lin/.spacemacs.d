@@ -1,0 +1,1 @@
+(volatile-highlights :repo "k-talo/volatile-highlights.el" :fetcher github :commit "9a20091f0ce7fc0a6b3e641a6a46d5f3ac4d8392")

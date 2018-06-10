@@ -1,0 +1,1 @@
+(mwim :repo "alezost/mwim.el" :fetcher github :commit "462207227b98a6a4356d51419f5ad5ba9356e5cf")

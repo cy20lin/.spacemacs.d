@@ -1,0 +1,1 @@
+(flycheck :repo "flycheck/flycheck" :fetcher github :commit "40ae191632c49cb4e9bac6b3841d7e27da8df34b")

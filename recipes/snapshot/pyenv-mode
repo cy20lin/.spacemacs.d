@@ -1,0 +1,1 @@
+(pyenv-mode :fetcher github :repo "proofit404/pyenv-mode" :commit "eabb1c66f9e0c0500fef4d089508aad246d81dc0")

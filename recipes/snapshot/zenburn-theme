@@ -1,0 +1,1 @@
+(zenburn-theme :repo "bbatsov/zenburn-emacs" :fetcher github :commit "eea429cb2cbde8674b2a17ccc2bda94b54575c01")

@@ -1,0 +1,1 @@
+(cmake-mode :fetcher github :repo "Kitware/CMake" :files ("Auxiliary/*.el") :commit "812eaa465ca026ff0413f8c78b41edccd7eefdc7")

@@ -1,0 +1,1 @@
+(paradox :repo "Malabarba/paradox" :fetcher github :commit "e5dd26f67ba8fa8ab1631a00ddea4117805b3fd0")

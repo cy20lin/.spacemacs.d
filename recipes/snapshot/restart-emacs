@@ -1,0 +1,1 @@
+(restart-emacs :fetcher github :repo "iqbalansari/restart-emacs" :commit "9aa90d3df9e08bc420e1c9845ee3ff568e911bd9")

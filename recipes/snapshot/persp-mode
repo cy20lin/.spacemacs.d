@@ -1,0 +1,1 @@
+(persp-mode :repo "Bad-ptr/persp-mode.el" :fetcher github :commit "cc1d16aeb17f45d7141fcdc45f8bbffa03b3127f")

@@ -1,0 +1,1 @@
+(ace-window :repo "abo-abo/ace-window" :fetcher github :commit "92d20e7e75dbb2ba0b879d3aedb8bed51fcee6a7")

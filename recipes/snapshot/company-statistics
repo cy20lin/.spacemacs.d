@@ -1,0 +1,1 @@
+(company-statistics :repo "company-mode/company-statistics" :fetcher github :commit "e62157d43b2c874d2edbd547c3bdfb05d0a7ae5c")

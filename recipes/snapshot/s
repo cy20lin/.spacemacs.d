@@ -1,0 +1,1 @@
+(s :fetcher github :repo "magnars/s.el" :files ("s.el") :commit "03410e6a7a2b11e47e1fea3b7d9899c7df26435e")

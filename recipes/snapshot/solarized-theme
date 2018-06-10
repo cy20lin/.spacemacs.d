@@ -1,0 +1,1 @@
+(solarized-theme :repo "bbatsov/solarized-emacs" :fetcher github :commit "f6160e5de9c270d891b14f050ffd9761ec2cf2ee")

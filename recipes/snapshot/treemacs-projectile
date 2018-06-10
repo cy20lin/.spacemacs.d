@@ -1,0 +1,1 @@
+(treemacs-projectile :fetcher github :repo "Alexander-Miller/treemacs" :files ("src/elisp/treemacs-projectile.el") :commit "9d71da13795762a623a42222af06033ffa7c073b")

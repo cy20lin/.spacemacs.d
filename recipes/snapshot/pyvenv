@@ -1,0 +1,1 @@
+(pyvenv :fetcher github :repo "jorgenschaefer/pyvenv" :commit "fa76fe18e290e318dbd17fd6f90ae0c492bea8b5")

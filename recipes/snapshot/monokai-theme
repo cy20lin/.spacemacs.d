@@ -1,0 +1,1 @@
+(monokai-theme :repo "oneKelvinSmith/monokai-emacs" :fetcher github :commit "1143c072f5153ae1a69807e5e8af163069b947d2")

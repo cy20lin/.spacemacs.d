@@ -1,0 +1,1 @@
+(quickrun :repo "syohex/emacs-quickrun" :fetcher github :commit "55bbe5d54b80206ea5a60bf2f58eb6368b2c8201")

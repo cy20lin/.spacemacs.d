@@ -1,0 +1,1 @@
+(helm-purpose :repo "bmag/helm-purpose" :fetcher github :commit "9ff4c21c1e9ebc7afb851b738f815df7343bb287")

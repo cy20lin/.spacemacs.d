@@ -1,0 +1,1 @@
+(livid-mode :fetcher github :repo "pandeiro/livid-mode" :commit "dfe5212fa64738bc4138bfebf349fbc8bc237c26")

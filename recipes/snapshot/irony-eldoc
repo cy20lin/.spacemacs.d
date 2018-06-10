@@ -1,0 +1,1 @@
+(irony-eldoc :fetcher github :repo "ikirill/irony-eldoc" :commit "0df5831eaae264a25422b061eb2792aadde8b3f2")

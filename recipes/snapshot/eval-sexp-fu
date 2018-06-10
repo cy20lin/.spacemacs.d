@@ -1,0 +1,1 @@
+(eval-sexp-fu :fetcher github :repo "hchbaw/eval-sexp-fu.el" :commit "1cfd0f3e167d63080692fad97ffe0091b024ad73")

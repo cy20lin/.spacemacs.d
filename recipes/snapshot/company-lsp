@@ -1,0 +1,1 @@
+(company-lsp :repo "tigersoldier/company-lsp" :fetcher github :commit "88155b0d7cd29f95b0a20c134d28d68ef03c640d")

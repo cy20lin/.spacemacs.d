@@ -1,0 +1,1 @@
+(pippel :fetcher github :repo "brotzeit/pippel" :files (:defaults "pippel.py") :commit "3737d5934665b5059c1e858feeb4270262b37e53")

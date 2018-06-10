@@ -1,0 +1,1 @@
+(evil-lisp-state :repo "syl20bnr/evil-lisp-state" :fetcher github :commit "3c65fecd9917a41eaf6460f22187e2323821f3ce")

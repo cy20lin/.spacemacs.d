@@ -1,0 +1,1 @@
+(pip-requirements :repo "Wilfred/pip-requirements.el" :fetcher github :commit "4eff2953317272e145649effb1956081a31645ee")

@@ -1,0 +1,1 @@
+(evil-visualstar :repo "bling/evil-visualstar" :fetcher github :commit "06c053d8f7381f91c53311b1234872ca96ced752")

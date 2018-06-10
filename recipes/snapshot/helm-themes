@@ -1,0 +1,1 @@
+(helm-themes :repo "syohex/emacs-helm-themes" :fetcher github :commit "1160af42590b0d845a55e65e1e782d9e4027fd6e")

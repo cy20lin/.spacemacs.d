@@ -1,0 +1,1 @@
+(evil-escape :repo "syl20bnr/evil-escape" :fetcher github :commit "25920fb2f4ef48998eecea433c04096f8d124cfe")

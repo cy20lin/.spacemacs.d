@@ -1,0 +1,1 @@
+(disaster :repo "jart/disaster" :fetcher github :files ("disaster.el") :commit "10a785facc60d89d78e0d5177985ab1af1741bb4")

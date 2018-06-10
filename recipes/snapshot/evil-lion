@@ -1,0 +1,1 @@
+(evil-lion :repo "edkolev/evil-lion" :fetcher github :files ("evil-lion.el") :commit "aaa3874ad54c31b4322ac5bbc63e331498b11d61")

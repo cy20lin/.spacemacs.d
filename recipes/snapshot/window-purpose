@@ -1,0 +1,1 @@
+(window-purpose :repo "bmag/emacs-purpose" :fetcher github :files (:defaults "layouts") :old-names (purpose) :commit "8737c5d8cb4a0d749771a04a136a784e5d519d5e")

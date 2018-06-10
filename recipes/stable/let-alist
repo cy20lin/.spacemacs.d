@@ -1,0 +1,13 @@
+;; Elpa package
+;; This package is builtin with emacs25 though.
+;; FIXME: Following recipe doesn't work, beacuse name mismatch.
+;; (PatchedSpacemacs.Debug) error=(error "Single file let-alist-1.0.5.el does not match package name let-alist")
+;; Consider reporting to upstream.
+;; (let-alist :fetcher url :url "https://elpa.gnu.org/packages/let-alist-1.0.5.el")
+;;
+;; Workaround:
+;; https://github.com/syl20bnr/spacelpa
+(let-alist :fetcher 'github
+           :repo "syl20bnr/spacelpa"
+           :files ("let-alist-1.0.5.el")
+           :commit "846259223eaabeb28f3df69817091bff4ea02b85")

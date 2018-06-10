@@ -1,0 +1,1 @@
+(clang-format :fetcher github :repo "emacsorphanage/clang-format" :commit "3620b76c6657a53d0c5033e6a05e6104541ebc7d")

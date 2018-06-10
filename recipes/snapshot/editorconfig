@@ -1,0 +1,1 @@
+(editorconfig :fetcher github :repo "editorconfig/editorconfig-emacs" :old-names (editorconfig-core editorconfig-fnmatch) :commit "e314a7cb643790bb0ed835af7a905a5955b12afe")

@@ -1,0 +1,1 @@
+(elisp-slime-nav :repo "purcell/elisp-slime-nav" :fetcher github :commit "34938422929800839e2f935aca890cd4a229ca99")

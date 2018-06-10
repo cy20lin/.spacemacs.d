@@ -1,0 +1,2 @@
+;; Release 1.0
+(rainbow-mode :fetcher github :repo "emacsmirror/rainbow-mode" :commit "3e5d506bc4e11c912f315483b8904afa78333a26")

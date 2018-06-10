@@ -1,0 +1,1 @@
+(toc-org :fetcher github :repo "snosov1/toc-org" :old-names (org-toc) :commit "4d259c9cea3f575e5210974c025ebe3d51cc317f")

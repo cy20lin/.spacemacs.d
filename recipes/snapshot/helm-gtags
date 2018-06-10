@@ -1,0 +1,1 @@
+(helm-gtags :repo "syohex/emacs-helm-gtags" :fetcher github :commit "108e93d0d099ebb7b98847388f368311cf177033")

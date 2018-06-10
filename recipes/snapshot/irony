@@ -1,0 +1,1 @@
+(irony :fetcher github :repo "Sarcasm/irony-mode" :files ("*.el" "server") :commit "2b1db096b65260fa06690a81ce4e9fca2d164cdf")

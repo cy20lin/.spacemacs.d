@@ -1,0 +1,1 @@
+(helm-swoop :repo "ShingoFukuyama/helm-swoop" :fetcher github :commit "c66336b8245ddc51c4206f19c119f1081920985c")

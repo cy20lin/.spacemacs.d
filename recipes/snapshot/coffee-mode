@@ -1,0 +1,1 @@
+(coffee-mode :repo "defunkt/coffee-mode" :fetcher github :commit "86ab8aae8662e8eff54d3013010b9c693b16eac5")

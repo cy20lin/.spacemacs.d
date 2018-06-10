@@ -1,0 +1,1 @@
+(evil-mc :fetcher github :repo "gabesoft/evil-mc" :commit "779e7d35bf38b482c0fccacfbffd877e5f455457")

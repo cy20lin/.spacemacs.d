@@ -1,0 +1,1 @@
+(js2-mode :repo "mooz/js2-mode" :fetcher github :commit "1b0e174d801d147aec88ecff7b50bb163b3cd2e8")

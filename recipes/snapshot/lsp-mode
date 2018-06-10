@@ -1,0 +1,1 @@
+(lsp-mode :repo "emacs-lsp/lsp-mode" :fetcher github :commit "6a6ae3fc5d9057ba08fad9e090c3e7a0231e3a6c")

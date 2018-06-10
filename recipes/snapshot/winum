@@ -1,0 +1,1 @@
+(winum :fetcher github :repo "deb0ch/emacs-winum" :commit "c56d1cdb8d1723eb4c0d7a7eb3ecd2697739146c")

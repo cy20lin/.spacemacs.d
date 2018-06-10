@@ -1,0 +1,1 @@
+(helm-gitignore :fetcher github :repo "jupl/helm-gitignore" :commit "2a2e7da7855a6db0ab3bb6a6a087863d7abd4391")

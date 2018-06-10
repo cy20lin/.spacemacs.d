@@ -1,0 +1,1 @@
+(anzu :fetcher github :repo "syohex/emacs-anzu" :commit "e6c56ca8b23ac433f7be58b6f3f50801dd4164e4")

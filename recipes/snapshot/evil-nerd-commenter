@@ -1,0 +1,1 @@
+(evil-nerd-commenter :fetcher github :repo "redguardtoo/evil-nerd-commenter" :commit "34d411715ead5829d6d8969511047feb703b067e")

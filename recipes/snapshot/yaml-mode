@@ -1,0 +1,1 @@
+(yaml-mode :repo "yoshiki/yaml-mode" :fetcher github :commit "40067a10ac1360f0b9533f0bbbb2eea128e2574d")

@@ -1,0 +1,1 @@
+(imenu-list :repo "bmag/imenu-list" :fetcher github :commit "04f0632f7b8c81be8747617768c57b66e5d60994")

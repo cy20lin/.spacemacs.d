@@ -1,0 +1,1 @@
+(flx-ido :repo "lewang/flx" :fetcher github :files ("flx-ido.el") :commit "46040d0b096a0340d91235561f27a959a61d0fef")

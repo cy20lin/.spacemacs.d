@@ -1,0 +1,1 @@
+(column-enforce-mode :fetcher github :repo "jordonbiondo/column-enforce-mode" :commit "2341a2b6a33d4b8b74c35062ec9cfe1bffd61944")

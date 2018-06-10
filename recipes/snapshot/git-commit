@@ -1,0 +1,1 @@
+(git-commit :fetcher github :repo "magit/magit" :files ("lisp/git-commit.el") :old-names (git-commit-mode) :commit "36d69369f7f9fb64954a4805576010957cf5b29a")

@@ -1,0 +1,1 @@
+(packed :repo "emacscollective/packed" :fetcher github :files ("packed.el") :commit "c41c3dfda86ae33832ffc146923e2a4675cbacfa")

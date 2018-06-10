@@ -1,0 +1,1 @@
+(hy-mode :repo "hylang/hy-mode" :fetcher github :commit "fad05d8652dbd29eea13ad11436a4fb671ebe278")

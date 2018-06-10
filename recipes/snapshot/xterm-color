@@ -1,0 +1,1 @@
+(xterm-color :repo "atomontage/xterm-color" :fetcher github :commit "42374a98f1039e105cad9f16ce585dffc96a3f1c")

@@ -1,0 +1,1 @@
+(js-doc :fetcher github :repo "mooz/js-doc" :commit "f0606e89d5aa89146f96edb38cf69af0068a9d1e")

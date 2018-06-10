@@ -1,0 +1,1 @@
+(shell-pop :repo "kyagi/shell-pop-el" :fetcher github :commit "4a3a9d093ad1add792bba764c601aa28de302b34")

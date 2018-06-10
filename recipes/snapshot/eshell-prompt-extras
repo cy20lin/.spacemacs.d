@@ -1,0 +1,1 @@
+(eshell-prompt-extras :fetcher github :repo "hiddenlotus/eshell-prompt-extras" :commit "1d8825dcc005b488c6366d0b3015fc6686194eea")

@@ -1,0 +1,1 @@
+(hydra :repo "abo-abo/hydra" :fetcher github :commit "5b8f66299249cc771008248279544b8eb3ecdc19")

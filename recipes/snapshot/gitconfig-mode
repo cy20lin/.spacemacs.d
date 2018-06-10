@@ -1,0 +1,1 @@
+(gitconfig-mode :repo "magit/git-modes" :fetcher github :files ("gitconfig-mode.el") :commit "b08ac12f09a6cfe967ef70dad3f22430da4fbdab")

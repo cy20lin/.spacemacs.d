@@ -1,0 +1,1 @@
+(fuzzy :repo "auto-complete/fuzzy-el" :fetcher github :files ("fuzzy.el") :commit "534d723ad2e06322ff8d9bd0ba4863d243f698e7")

@@ -1,0 +1,1 @@
+(counsel-projectile :fetcher github :repo "ericdanan/counsel-projectile" :commit "8f85a392d860007b799d53175781aa7810174709")

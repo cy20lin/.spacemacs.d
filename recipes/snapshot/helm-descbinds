@@ -1,0 +1,1 @@
+(helm-descbinds :repo "emacs-helm/helm-descbinds" :fetcher github :commit "033be73f21778633813264ce1634a6e1ad873d8e")

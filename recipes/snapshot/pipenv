@@ -1,0 +1,1 @@
+(pipenv :repo "pwalsh/pipenv.el" :fetcher github :commit "7f1fb3dd1704e535e67860c58080e55fc89e07f4")

@@ -1,0 +1,1 @@
+(lsp-python :repo "emacs-lsp/lsp-python" :fetcher github :commit "e2fb53d191344dd73e26ffaaa4ac95cd6686dbd9")

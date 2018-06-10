@@ -1,0 +1,1 @@
+(git-link :fetcher github :repo "sshaw/git-link" :commit "27d642347e3d687a7a2214dbc53d1526e98f7571")

@@ -1,0 +1,1 @@
+(helm-projectile :repo "bbatsov/helm-projectile" :fetcher github :commit "a6a453b7a32d52f4ddd125deb88d7d81542440d2")

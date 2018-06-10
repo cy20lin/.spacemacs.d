@@ -1,0 +1,1 @@
+(highlight :fetcher git :url "https://framagit.org/steckerhalter/highlight.el.git" :commit "6f92253690dde26d9bfd21546fdf68ef2fdd486b")

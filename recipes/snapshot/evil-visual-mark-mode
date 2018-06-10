@@ -1,0 +1,1 @@
+(evil-visual-mark-mode :repo "roman/evil-visual-mark-mode" :fetcher github :commit "094ee37599492885ff3144918fcdd9b74dadaaa0")

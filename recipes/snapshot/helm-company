@@ -1,0 +1,1 @@
+(helm-company :repo "Sodel-the-Vociferous/helm-company" :fetcher github :commit "acc9c7901e094c1591327a0db1ec7a439f67a84d")

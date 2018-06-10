@@ -1,0 +1,1 @@
+(concurrent :repo "kiwanami/emacs-deferred" :fetcher github :files ("concurrent.el") :commit "2239671d94b38d92e9b28d4e12fd79814cfb9c16")

@@ -1,0 +1,1 @@
+(company :repo "company-mode/company-mode" :fetcher github :commit "779662f9e994c351002107a18f99cd06e00ed6c1")

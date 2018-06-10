@@ -1,0 +1,1 @@
+(evil-ediff :repo "emacs-evil/evil-ediff" :fetcher github :commit "67b0e69f65c196eff5b39dacb7a9ec05bb919c74")

@@ -1,0 +1,1 @@
+(levenshtein :fetcher github :repo "emacsorphanage/levenshtein" :commit "070925197ebf6b704e6e00c4f2d2ec783f3df38c")

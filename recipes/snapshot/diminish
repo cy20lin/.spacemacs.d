@@ -1,0 +1,1 @@
+(diminish :fetcher github :repo "myrjola/diminish.el" :commit "565a983a39d2e2cffab5df13b34f3b6116723208")

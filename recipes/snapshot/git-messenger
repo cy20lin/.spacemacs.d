@@ -1,0 +1,1 @@
+(git-messenger :repo "syohex/emacs-git-messenger" :fetcher github :commit "83815915eb8c1cb47443ff34bca3fecf7d2edf3a")

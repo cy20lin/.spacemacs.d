@@ -1,0 +1,1 @@
+(pcre2el :fetcher github :repo "joddie/pcre2el" :files ("pcre2el.el") :commit "0b5b2a2c173aab3fd14aac6cf5e90ad3bf58fa7d")

@@ -1,0 +1,1 @@
+(ht :repo "Wilfred/ht.el" :files ("ht.el") :fetcher github :commit "5a665d00dc8fda77bad2a43277d8809c23e46ab8")

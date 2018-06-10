@@ -1,0 +1,1 @@
+(google-translate :fetcher github :repo "atykhonov/google-translate" :commit "d8b84a8359fcc697114d1298840e9a45b111c974")

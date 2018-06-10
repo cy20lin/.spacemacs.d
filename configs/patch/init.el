@@ -21,7 +21,6 @@ LONG-NAME if given is stored in `spacemacs/prefix-titles'."
       (when (and is-major-mode-prefix dotspacemacs-major-mode-emacs-leader-key)
         (which-key-declare-prefixes major-mode-prefix-emacs prefix-name)))))
 
-
 ;; Patch this someday.
 ;; NOTE: Maybe we can start form these funcs and vars.
 ;; (spacemacs-bootstrap/init-which-key)
@@ -53,43 +52,50 @@ LONG-NAME if given is stored in `spacemacs/prefix-titles'."
 ;;
 ;; #3
 ;;
-(defvar my-private-melpa-recipes-directory "~/.spacemacs.d/recipes")
-;; (concat (file-name-as-directory dotspacemacs-directory) "recipes")
+;; (defvar my-private-melpa-recipe-stores '("~/.spacemacs.d/recipes/stable/" "~/.spacemacs.d/recipes/snapshot/"))
+(defvar my-private-melpa-recipe-stores '("~/.spacemacs.d/recipes/stable/"))
 
-(defun my-configuration-layer//get-private-quelpa-recipe (name)
+(defun my-configuration-layer//get-private-recipe (name)
   (with-temp-buffer
     (setq-local quelpa-melpa-recipe-stores
                 (cond
-                 ((stringp my-private-melpa-recipes-directory) (list my-private-melpa-recipes-directory))
-                 ((listp my-private-melpa-recipes-directory) my-private-melpa-recipes-directory)
+                 ((stringp my-private-melpa-recipe-stores) (list my-private-melpa-recipe-stores))
+                 ((listp my-private-melpa-recipe-stores) my-private-melpa-recipe-stores)
                  (t nil)))
+    (setq-local package-check-signature 'allow-unsigned)
     (quelpa-get-melpa-recipe name)))
 
-(defun my-configuration-layer//install-from-private-quelpa (pkg-name)
-  (let ((recipe (my-configuration-layer//get-private-quelpa-recipe name)))
-    (if recipe
-        (or (quelpa recipe) t))))
-
-(defun my-configuration-layer//install-from-private-quelpa-and-elpa (pkg-name)
-  "Install PKG from ELPA."
-  ;; (message "ELPA: %S" pkg-name)
-  (let ((recipe (my-configuration-layer//get-private-quelpa-recipe pkg-name)))
+(defun my-configuration-layer//install-from-private-recipe (pkg-name)
+  ""
+  (let ((recipe (my-configuration-layer//get-private-recipe pkg-name)))
     (if recipe
         (with-temp-buffer
+          ;; NOTE: Maybe prepend to quelpa-melpa-recipe-stores
           (setq-local quelpa-melpa-recipe-stores
-                      (cond
-                       ((stringp my-private-melpa-recipes-directory) (list my-private-melpa-recipes-directory))
-                       ((listp my-private-melpa-recipes-directory) my-private-melpa-recipes-directory)
-                       (t nil)))
-          ;; (message "package %S, with recipe %S" pkg-name recipe)
-          (quelpa recipe))
-      (configuration-layer//install-from-elpa pkg-name))))
+                      (append (cond
+                               ((stringp my-private-melpa-recipe-stores) (list my-private-melpa-recipe-stores))
+                               ((listp my-private-melpa-recipe-stores) my-private-melpa-recipe-stores)
+                               (t nil))
+                              quelpa-melpa-recipe-stores))
+          (setq-local package-check-signature 'allow-unsigned)
+          (quelpa recipe))))
+  (let ((installed-p (package-installed-p pkg-name)))
+    (if installed-p (message "(PatchedSpacemacs) --> private recipe package installed: %S" pkg-name))
+    installed-p))
+
+(defun my-configuration-layer//install-from-private-recipe-or-elpa (pkg-name)
+  "Install PKG from QUELPA or ELPA."
+  (or
+   (my-configuration-layer//install-from-private-recipe pkg-name)
+   (configuration-layer//install-from-elpa pkg-name)))
 
 (defun configuration-layer//install-package (pkg)
   "Unconditionally install the package PKG."
+  (message "(PatchedSpacemacs.Debug) configuration-layer//install-package: %S" pkg)
   (let* ((layer (when pkg (car (oref pkg :owners))))
          (location (when pkg (oref pkg :location)))
          (min-version (when pkg (oref pkg :min-version))))
+    (message "(PatchedSpacemacs.Debug) layer=%S, location=%S, min-version=%S" layer location min-version)
     (spacemacs-buffer/replace-last-line
      (format "--> installing %s: %s%s... [%s/%s]"
              (if layer "package" "dependency")
@@ -100,14 +106,33 @@ LONG-NAME if given is stored in `spacemacs/prefix-titles'."
       (condition-case-unless-debug err
           (cond
            ((or (null pkg) (eq 'elpa location))
-            (my-configuration-layer//install-from-private-quelpa-and-elpa pkg-name)
+            (message "(PatchedSpacemacs.Debug) action=inst")
+            (or
+             (let ((result (progn
+                             (message "(PatchedSpacemacs.Debug) action=install-from-private-recipe")
+                             (my-configuration-layer//install-from-private-recipe pkg-name))))
+               (message "(PatchedSpacemacs.Debug) result=%S" result)
+               result)
+             (let ((result (progn
+                             (message "(PatchedSpacemacs.Debug) action=install-from-elpa")
+                             (configuration-layer//install-from-elpa pkg-name))))
+               (message "(PatchedSpacemacs.Debug) result=%S" result)
+               result))
             (when pkg (cfgl-package-set-property pkg :lazy-install nil)))
            ((and (listp location) (eq 'recipe (car location)))
-            (configuration-layer//install-from-recipe pkg)
+            (let ((result (progn
+                            (message "(PatchedSpacemacs.Debug) action=install-from-recipe")
+                            (configuration-layer//install-from-recipe pkg))))
+              (message "(PatchedSpacemacs.Debug) result=%S" result)
+              result)
             (cfgl-package-set-property pkg :lazy-install nil))
-           (t (configuration-layer//warning "Cannot install package %S."
-                                            pkg-name)))
+           (t
+            (message "(PatchedSpacemacs.Debug) action=none")
+            (message "(PatchedSpacemacs.Debug) result=none")
+            (configuration-layer//warning "Cannot install package %S."
+                                          pkg-name)))
         ('error
+         (message "(PatchedSpacemacs.Debug) error=%S" err)
          (configuration-layer//error
           (concat "\nAn error occurred while installing %s "
                   "(error: %s)\n") pkg-name err)

@@ -1,0 +1,1 @@
+(pytest :fetcher github :repo "ionrock/pytest-el" :commit "013fccd684fc8f2092d6e1ec4203ec574e12051d")

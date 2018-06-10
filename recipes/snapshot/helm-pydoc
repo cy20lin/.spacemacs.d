@@ -1,0 +1,1 @@
+(helm-pydoc :fetcher github :repo "syohex/emacs-helm-pydoc" :files (:defaults "*.py") :commit "85480a29b56dacde425655bc8f5a597c785afdf5")

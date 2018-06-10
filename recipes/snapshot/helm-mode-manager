@@ -1,0 +1,1 @@
+(helm-mode-manager :fetcher github :repo "istib/helm-mode-manager" :commit "5d9c3ca4f8205d07ff4e03c4c3e88f596751c1fc")

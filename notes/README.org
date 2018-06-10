@@ -1,0 +1,90 @@
+#+STARTUP: showall
+#+AUTHOR: ChienYu Lin
+#+TAGS: issue feature patch todo done wip
+* Todo
+** toward a desktop environment
+   managing all apps, being evil everywhere.
+** be mouse friendly (not only for keyboard)
+*** tabbar for mouse to switch between buffer
+*** drag and drop
+*** popup menu
+
+** make  smarter (=SPC f f=)
+*** list of function to improve
+    sometimes,
+** psuedo popup-menu :feature:
+   like what package =company= does, but for mouse integration
+** theme =darkokai=
+
+** stable package dependencies -- pkgpin
+   Depend on specific version of package, so we could configure it without worries about
+   the potential API changes in the future, manual update it if needed.
+*** implementation notes
+    -
+*** pinned packages
+
+** files synchronization among devices and clouds
+
+** bootstrap configurations with sensitive data
+   such as personal informations, definitely should not be storing in the repo with normal
+   configurations
+
+** conflict between org-mode & psuedo-menu
+*** issue
+    psuedo-menu is not beautifully aligned in org-mode,
+    because fonts in org-mode is not mono-heighted,
+    there are different font-faces according to their role
+    (e.g. title, content, link, heading)
+
+** emacs with purpose
+*** play music & video
+    - [[https://www.gnu.org/software/emms/][emms]]
+
+*** website browsing (gui)
+*** website browsing (terminal)
+*** file explorer
+*** email client
+*** pdf viewer
+*** window manager
+**** references
+     - exwm
+     - [[https://github.com/fuhsjr00/bug.n][bug.n]]
+     - howm
+       - https://news.ycombinator.com/item?id=8241978
+       - https://github.com/HarveyHunt/howm
+     - https://stackoverflow.com/questions/46756609/how-to-run-an-exe-file-from-windows-command-line-without-the-title-bar
+     - WinSpy++
+     - https://unix.stackexchange.com/questions/31487/is-there-a-winspy-like-tool-for-linux-x-gtk-qt
+     - https://unix.stackexchange.com/questions/96570/obtaining-xwindows-gui-menu-item-widget-names-from-the-command-line
+     - KD Executor
+     - editres
+***** make evil everywhere
+      - need api to interact with gui (external) window.
+        - is some key is bound or not.
+        - ui element loacation and functions to interact
+
+** how emacs install packages, i have to pin packages through quelpa
+*** hints
+    use-package-ensure-function
+    use-package-always-ensure
+    init.el
+    configuration-layer/load
+    + configuration-layer//install-packages
+      + configuration-layer/get-package
+        + configuration-layer--indexed-packages
+      + configuration-layer//install-package
+        + configuration-layer//install-from-recipe
+        + configuration-layer//install-from-epla
+    + configuration-layer/create-elpa-repository
+      + configuration-layer//get-indexed-elpa-package-names
+    + configuration-layer//configure-packages-2 (packages)
+      + configuration-layer/get-location-director
+    #+BEGIN_SRC emacs-lisp
+    (with-eval-after-load 'use-package-ensure
+      ;; (setq use-package-ensure-function 'quelpa)
+      (defun my-tracing-function (name args state &optional no-refresh)
+        (message "==== ensure ==== %S %S %S" name args state))
+      (add-function :before (symbol-function 'use-package-ensure-elpa) #'my-tracing-function)
+      (setq use-package-always-ensure nil))
+    #+END_SRC
+** private local package issue, dotfile extra-packages :local option

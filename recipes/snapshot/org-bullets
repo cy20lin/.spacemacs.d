@@ -1,0 +1,1 @@
+(org-bullets :fetcher github :repo "emacsorphanage/org-bullets" :commit "5b096148bc37306f73b27da838dca751d5b1936f")

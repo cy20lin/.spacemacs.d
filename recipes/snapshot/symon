@@ -1,0 +1,1 @@
+(symon :repo "zk-phi/symon" :fetcher github :files ("symon.el") :commit "8dd8b6df49b03cd7d31b85aedbe9dd08fb922335")

@@ -1,0 +1,1 @@
+(company-tern :fetcher github :repo "proofit404/company-tern" :commit "10ac058b065ae73c1f30e9fb7d969dd1a79387be")

@@ -1,0 +1,1 @@
+(magit-popup :fetcher github :repo "magit/magit-popup" :commit "60ff82ac7aa8dbc24eb3c34dbed13ad01f20671c")

@@ -1,0 +1,1 @@
+(simple-httpd :repo "skeeto/emacs-web-server" :fetcher github :commit "49721d5b791bee0fc25b1fdd69696371d546093a")

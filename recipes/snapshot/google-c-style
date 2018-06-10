@@ -1,0 +1,1 @@
+(google-c-style :fetcher github :repo "google/styleguide" :commit "f9347e1e9d79aee9cde0802fe178d72c8f87926c")

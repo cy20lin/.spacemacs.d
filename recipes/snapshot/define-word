@@ -1,0 +1,1 @@
+(define-word :repo "abo-abo/define-word" :fetcher github :commit "978ec835393b313ab6b9a33df17af315beebf0f5")

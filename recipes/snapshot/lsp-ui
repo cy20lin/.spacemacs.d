@@ -1,0 +1,1 @@
+(lsp-ui :repo "emacs-lsp/lsp-ui" :fetcher github :commit "7349c49ea64a26be923edb212822b2585744f9b2")

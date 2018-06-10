@@ -1,0 +1,1 @@
+(importmagic :fetcher github :repo "anachronic/importmagic.el" :files (:defaults "importmagicserver.py") :commit "e32ee9f6a5eef937b76eba82fdae8bae85d18088")

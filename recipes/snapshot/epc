@@ -1,0 +1,1 @@
+(epc :repo "kiwanami/emacs-epc" :fetcher github :files ("epc.el" "epcs.el") :commit "e1bfa5ca163273859336e3cc89b4b6460f7f8cda")

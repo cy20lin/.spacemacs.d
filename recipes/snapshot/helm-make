@@ -1,0 +1,1 @@
+(helm-make :repo "abo-abo/helm-make" :fetcher github :commit "e72cdacecb46421dfbde9febdc352a5f06425176")

@@ -1,0 +1,1 @@
+(request :repo "tkf/emacs-request" :fetcher github :files ("request.el") :commit "a3d080e57eb8be606fbf39d1baff94e1b16e1fb8")

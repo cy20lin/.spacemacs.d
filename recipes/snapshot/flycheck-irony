@@ -1,0 +1,1 @@
+(flycheck-irony :fetcher github :repo "Sarcasm/flycheck-irony" :commit "42dbecd4a865cabeb301193bb4d660e26ae3befe")

@@ -1,0 +1,1 @@
+(loc-changes :fetcher github :repo "rocky/emacs-loc-changes" :files ("loc-changes.el") :commit "4d1dcdf7631c23b1259ad4f72bf9686cf95fb46c")

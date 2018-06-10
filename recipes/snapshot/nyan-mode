@@ -1,0 +1,1 @@
+(nyan-mode :fetcher github :repo "TeMPOraL/nyan-mode" :files ("nyan-mode.el" "img" "mus") :commit "3447aa114575230cb230862ac0ac9b065f789ecd")

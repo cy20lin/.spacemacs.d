@@ -1,0 +1,1 @@
+(company-irony :fetcher github :repo "Sarcasm/company-irony" :commit "52aca45bcd0f2cb0648fcafa2bbb4f8ad4b2fee7")

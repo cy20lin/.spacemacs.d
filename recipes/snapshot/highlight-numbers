@@ -1,0 +1,1 @@
+(highlight-numbers :fetcher github :repo "Fanael/highlight-numbers" :old-names (number-font-lock-mode) :commit "f952ecb7448c125d4ef82ee6ad136b25e640d74a")

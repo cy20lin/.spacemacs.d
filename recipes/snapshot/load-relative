@@ -1,0 +1,1 @@
+(load-relative :fetcher github :repo "rocky/emacs-load-relative" :commit "738896e3da491b35399178ed2c6bc92cc728d119")

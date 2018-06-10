@@ -1,0 +1,1 @@
+(link-hint :fetcher github :repo "noctuid/link-hint.el" :commit "23df5fa36ab182452be6b772475eab67b846dd92")

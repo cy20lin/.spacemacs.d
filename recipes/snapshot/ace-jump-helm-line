@@ -1,0 +1,1 @@
+(ace-jump-helm-line :repo "cute-jumper/ace-jump-helm-line" :fetcher github :commit "1483055255df3f8ae349f7520f05b1e43ea3ed37")

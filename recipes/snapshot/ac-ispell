@@ -1,0 +1,1 @@
+(ac-ispell :fetcher github :repo "syohex/emacs-ac-ispell" :commit "22bace7387e9012002a6a444922f75f9913077b0")

@@ -1,0 +1,1 @@
+(yasnippet-snippets :repo "AndreaCrotti/yasnippet-snippets" :fetcher github :files ("*.el" "snippets" ".nosearch") :commit "214ddf78e331ae72bc0ccdc9591475d3be82248b")

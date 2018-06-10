@@ -1,0 +1,1 @@
+(js2-refactor :repo "magnars/js2-refactor.el" :fetcher github :commit "186e1abf8c818623e1eef8bb07509d2ea11367b8")
