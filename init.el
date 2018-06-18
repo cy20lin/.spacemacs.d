@@ -34,12 +34,12 @@ values."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   `(yaml
-     ;; ----------------------------------------------------------------
+   `(;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (chinese :variables chinese-enable-fcitx t)
      ;; +lang/
      ;; TODO:
      ;; check emacs-version before including `treemacs' layer,
@@ -92,9 +92,9 @@ values."
              ;; flycheck-python-pycompile-executable "python3"
              python-backend 'lsp
              )
-     ;; yaml
+     yaml
      ;; haskell
-     ;; html
+     html
      ;; windows-scripts
      ;; asm
      ;; csv
@@ -103,7 +103,7 @@ values."
      ;; octave
      ;; restructured-text
      ;; markdown
-     ;; org
+     org
      ;; +tools/
      ;; pdf-tools
      ;; +intl/
@@ -111,7 +111,7 @@ values."
      ;; +tags/
      ;; cscope
      ;; NOTE: maybe make gtags layer be depended by my-c-c++ layer
-     ,(when (executable-find "gtags") 'gtags)
+     ;; ,(when (executable-find "gtags") 'gtags)
      ;; +syn
      helm
      ;; +emacs/
@@ -211,8 +211,6 @@ values."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
-   ;; NOTE: There are some issues using spacelpa:
-   ;; https://github.com/syl20bnr/spacemacs/issues/10438
    dotspacemacs-use-spacelpa nil
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
@@ -565,8 +563,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (with-eval-after-load 'quelpa
-    (add-to-list 'quelpa-melpa-recipe-stores (concat (file-name-as-directory dotspacemacs-directory) "recipes/snapshot")))
   ;; Set custom-file to custom.el to avoid this init.el be populated by
   ;; auto generated custom variable configs.
   (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
@@ -659,5 +655,14 @@ you should place your code here."
   ;; (c-toggle-auto-newline 1)
   (setq projectile-project-compilation-dir "build")
   (spaceline-toggle-hud-off)
-  (setq-default helm-allow-mouse t)
+  (fcitx-aggressive-setup)
+  (with-eval-after-load 'org
+    ;; https://stackoverflow.com/questions/12262220/add-created-date-property-to-todos-in-org-mode
+    (setq
+     org-expiry-created-property-name "CREATED" ; Name of property when an item is created
+     org-expiry-inactive-timestamps   t         ; Don't have everything in the agenda view
+     )
+    (org-expiry-insinuate)
+    )
   )
+
