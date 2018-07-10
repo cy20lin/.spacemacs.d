@@ -44,11 +44,11 @@ layer_install() {
               "-DCLANG_ROOT=${LAYER_CLANG_ROOT}" \
               -DSYSTEM_CLANG=ON \
               -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+	sudo cp -a "${LAYER_CLANG_ROOT}/." /usr/local
     else
         cmake -Bbuild -H. -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
     fi
     cmake --build build
-    sudo cp -a "${LAYER_CLANG_ROOT}/." /usr/local
     sudo cmake --build build --target install
     popd 1>/dev/null
 }
