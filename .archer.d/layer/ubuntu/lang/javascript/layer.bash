@@ -20,7 +20,7 @@ layer_install() {
     pushd /tmp/archer/source/nodejs/distributions
     git checkout 1fb7fd56201760a62581b61ac2e51013c0c3766c
     popd
-    sudo bash /tmp/archer/source/nodejs/distributions/deb/setup_10.x
+    sudo bash /tmp/archer/source/nodejs/distributions/deb/setup_8.x
     sudo apt-get update
     sudo apt-get install -y nodejs
     sudo apt-get install -y nodejs-legacy
