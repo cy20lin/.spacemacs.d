@@ -1,5 +1,5 @@
 layer_help() {
-    echo "app/irony-server"
+    echo "app/rtags"
 }
 
 layer_metadata() {
@@ -17,16 +17,16 @@ layer_is_installed() {
 
 
 layer_install() {
-    git clone --recursive https://github.com/Andersbakken/rtags.git /tmp/archer/source/rtags
-    pushd /tmp/archer/source/rtags
+    git clone --recursive https://github.com/Andersbakken/rtags.git "${ARCHER_TMP}/source/rtags"
+    pushd ${ARCHER_TMP}/source/rtags
     git checkout 98d668e85cf9ae84e775742752c5656dd2df2f17 # version 2.18
     popd
-    rm -rf /tmp/archer/build/rtags
-    mkdir -p /tmp/archer/build/rtags
-    cmake -H/tmp/archer/source/rtags \
-          -B/tmp/archer/build/rtags \
+    rm -rf "${ARCHER_TMP}/build/rtags"
+    mkdir -p "${ARCHER_TMP}/build/rtags"
+    cmake "-H${ARCHER_TMP}/source/rtags" \
+          "-B${ARCHER_TMP}/build/rtags" \
           -GUnix\ Makefiles
-    cmake --build /tmp/archer/build/rtags
-    sudo cmake --build /tmp/archer/build/rtags \
+    cmake --build "${ARCHER_TMP}/build/rtags"
+    sudo cmake --build '${ARCHER_TMP}/build/rtags' \
           --target install
 }

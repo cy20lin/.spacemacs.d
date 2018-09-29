@@ -10,7 +10,7 @@ layer_metadata() {
         app/global
         app/irony-server
         app/make
-        app/rtags
+#        app/rtags
         app/cquery
     )
 }
