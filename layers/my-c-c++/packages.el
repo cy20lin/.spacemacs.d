@@ -34,7 +34,7 @@
     ;; (my-c-c++ :location local)
     projectile
     irony
-    aide
+    ;; aide
     )
   "The list of Lisp packages required by the my-c-c++ layer.
 
@@ -73,18 +73,23 @@ Each entry is either:
   (spacemacs|use-package-add-hook projectile
     :pre-config
     (progn
-      (add-to-list 'projectile-project-root-files-top-down-recurring "CMakeLists.txt"))))
+      (add-to-list 'projectile-project-root-files-top-down-recurring "CMakeLists.txt")
+      (projectile-register-project-type
+       'cmake '("CMakeLists.txt")
+       :compile "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -H. -Bbuild && cmake --build build --target all --config Release"
+       :test "cmake --build build --target test"
+       :run "cmake --build build --target run"))))
 
-(defun my-c-c++/pre-init-aide ()
-  ;; (message "pre-init-aide")
-  (spacemacs|use-package-add-hook aide
-    :pre-config
-    (aide-register-project-type
-     'cmake '("CMakeLists.txt")
-     :compile "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -H. -Bbuild && cmake --build build --target all --config Release"
-     :test "cmake --build build --target test"
-     :run "cmake --build build --target run"
-     )))
+;; (defun my-c-c++/pre-init-aide ()
+;;   ;; (message "pre-init-aide")
+;;   (spacemacs|use-package-add-hook aide
+;;     :pre-config
+;;     (aide-register-project-type
+;;      'cmake '("CMakeLists.txt")
+;;      :compile "cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -H. -Bbuild && cmake --build build --target all --config Release"
+;;      :test "cmake --build build --target test"
+;;      :run "cmake --build build --target run"
+;;      )))
 
 (defun my-c-c++/pre-init-irony ()
   (spacemacs|use-package-add-hook irony

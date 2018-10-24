@@ -16,7 +16,8 @@ layer_is_installed() {
 layer_install() {
     git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d/
     pushd ~/.emacs.d/
-    git checkout 0fa3658cd8e283825dcd0a54ce1579dec55eb568
+    # git checkout 0fa3658cd8e283825dcd0a54ce1579dec55eb568
+    git checkout 901f35849af44ae433670d5030024834985ce9d4
     popd
     # FIXME:
     # How to gracefully kill-emacs and get the spacemacs bootstrap status,

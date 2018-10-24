@@ -11,7 +11,11 @@
 
 (defconst cquery-packages
   '(
-     cquery
+     (cquery
+      :location (recipe
+                 :fetcher github
+                 :repo "cquery-project/emacs-cquery"
+                 :commit "a803e92e77e1ffc74c13a753c1eb4f6f47127a97"))
      company-lsp
      projectile
      ))

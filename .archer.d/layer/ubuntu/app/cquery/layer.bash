@@ -16,16 +16,20 @@ layer_is_installed() {
 
 layer_install() {
 
-    git clone https://github.com/cquery-project/cquery ${ARCHER_TMP}/source/cquery
-    mkdir -p ${ARCHER_TMP}/build
-    cp ${ARCHER_TMP}/source/cquery ${ARCHER_TMP}/build -R
-    pushd ${ARCHER_TMP}/build/cquery 1>/dev/null
+    git clone https://github.com/cquery-project/cquery "${ARCHER_TMP}/source/cquery"
+    mkdir -p "${ARCHER_TMP}/build"
+    cp "${ARCHER_TMP}/source/cquery" "${ARCHER_TMP}/build" -R
+    pushd "${ARCHER_TMP}/build/cquery" 1>/dev/null
     # git checkout v20180302
-    git checkout 94a1a5c9d1911e919da3f5ab085fa3b938854505 # Fix bad memory usage by partially reverting
-    git submodule update --init
-    mkdir build 2>/dev/null
+
     if test "$(uname -m)" = aarch64
     then
+        # FIXME: Update to new cquery version
+        # v--- this is new one
+        # git checkout dcc8eb28fb32f0bec40891837c255e0dabae91be # List all possible overload resolutions when finding definitions
+        git checkout 94a1a5c9d1911e919da3f5ab085fa3b938854505 # Fix bad memory usage by partially reverting
+        git submodule update --init
+        mkdir build 2>/dev/null
         # https://releases.llvm.org/download.html#6.0.0
         # https://releases.llvm.org/6.0.0/clang+llvm-6.0.0-aarch64-linux-gnu.tar.xz
         # TODO: moving clang/v6.0.0 into another layer
@@ -48,6 +52,10 @@ layer_install() {
         sudo cp -a "${LAYER_CLANG_ROOT}/." /usr/local
         sudo cmake --build build --target install
     else
+        git checkout dcc8eb28fb32f0bec40891837c255e0dabae91be # List all possible overload resolutions when finding definitions
+        git submodule update --init
+        mkdir build 2>/dev/null
+        # build
         cmake -Bbuild -H. -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         cmake --build build
         sudo cmake --build build --target install

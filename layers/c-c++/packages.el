@@ -17,58 +17,58 @@
         clang-format
         company
         (company-c-headers :requires company)
-        (company-rtags
-         :location (recipe
-                    :fetcher github
-                    :repo "Andersbakken/rtags"
-                    ;; Bump version to 2.18
-                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
-                    :files ("src/company-rtags.el"))
-         :requires company rtags)
-        company-ycmd
+        ;; (company-rtags
+        ;;  :location (recipe
+        ;;             :fetcher github
+        ;;             :repo "Andersbakken/rtags"
+        ;;             ;; Bump version to 2.18
+        ;;             :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+        ;;             :files ("src/company-rtags.el"))
+        ;;  :requires company rtags)
+        ;; company-ycmd
         flycheck
-        (flycheck-rtags
-         :location (recipe
-                    :fetcher github
-                    :repo "Andersbakken/rtags"
-                    ;; Bump version to 2.18
-                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
-                    :files ("src/flycheck-rtags.el"))
-         :requires flycheck rtags)
+        ;; (flycheck-rtags
+        ;;  :location (recipe
+        ;;             :fetcher github
+        ;;             :repo "Andersbakken/rtags"
+        ;;             ;; Bump version to 2.18
+        ;;             :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+        ;;             :files ("src/flycheck-rtags.el"))
+        ;;  :requires flycheck rtags)
         gdb-mi
         ggtags
         counsel-gtags
         google-c-style
         helm-cscope
         helm-gtags
-        (helm-rtags
-         :location (recipe
-                    :fetcher github
-                    :repo "Andersbakken/rtags"
-                    ;; Bump version to 2.18
-                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
-                    :files ("src/helm-rtags.el"))
-         :requires helm rtags)
-        (ivy-rtags
-         :location (recipe
-                    :fetcher github
-                    :repo "Andersbakken/rtags"
-                    ;; Bump version to 2.18
-                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
-                    :files ("src/ivy-rtags.el"))
-         :requires ivy rtags)
-        (rtags
-         :location (recipe
-                    :fetcher github
-                    :repo "Andersbakken/rtags"
-                    ;; Bump version to 2.18
-                    :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
-                    :files ("src/rtags.el")))
+        ;; (helm-rtags
+        ;;  :location (recipe
+        ;;             :fetcher github
+        ;;             :repo "Andersbakken/rtags"
+        ;;             ;; Bump version to 2.18
+        ;;             :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+        ;;             :files ("src/helm-rtags.el"))
+        ;;  :requires helm rtags)
+        ;; (ivy-rtags
+        ;;  :location (recipe
+        ;;             :fetcher github
+        ;;             :repo "Andersbakken/rtags"
+        ;;             ;; Bump version to 2.18
+        ;;             :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+        ;;             :files ("src/ivy-rtags.el"))
+        ;;  :requires ivy rtags)
+        ;; (rtags
+        ;;  :location (recipe
+        ;;             :fetcher github
+        ;;             :repo "Andersbakken/rtags"
+        ;;             ;; Bump version to 2.18
+        ;;             :commit "98d668e85cf9ae84e775742752c5656dd2df2f17"
+        ;;             :files ("src/rtags.el")))
         realgud
         semantic
         srefactor
         stickyfunc-enhance
-        ycmd
+        ;; ycmd
         xcscope
         ;;
         projectile

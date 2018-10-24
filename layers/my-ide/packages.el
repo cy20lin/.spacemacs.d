@@ -31,12 +31,18 @@
 
 (defconst my-ide-packages
   `(
+    projectile
     ;; https://github.com/syl20bnr/spacemacs/pull/6562/commits/e217ef6290b614d7a364f1e3c9c9bb8f89266788
     ;; syl20bnr/spacemacs PR#8718
     ;; https://github.com/syl20bnr/spacemacs/pull/8718
     ;; FIXIT: if PR#8718 is merged into spacemacs master branch, use following recipe instead.
     ;; (aide :location (recipe :fetcher local))
-    (aide :location (recipe :fetcher file :path ,(concat (file-name-directory load-file-name) "local/aide")))
+    ;; (aide :location (recipe :fetcher file :path ,(concat (file-name-directory load-file-name) "local/aide")))
+    ;; (aide
+    ;;  :location (recipe
+    ;;             :fetcher github
+    ;;             :repo "cy20lin/aide"
+    ;;             :commit "15aa2716b11231d9b3470dc09a9ce9f7cece9769"))
     quickrun
     )
   "The list of Lisp packages required by the my-ide layer.
@@ -135,31 +141,31 @@ Each entry is either:
         :default "cmake"
         :mode 'cmake-mode))))
 
-(defun my-ide/init-aide ()
-  (use-package aide
-    :init nil
-    :config
-    (progn
-      (when my-ide-global-aide-mode-by-default (global-aide-mode)))))
+;; (defun my-ide/init-aide ()
+;;   (use-package aide
+;;     :init nil
+;;     :config
+;;     (progn (when nil ;my-ide-global-aide-mode-by-default
+;;              (global-aide-mode)))))
 
-(defun my-ide/pre-init-aide ()
-  (spacemacs|use-package-add-hook aide
-    :pre-config
-    (progn
-      (when (configuration-layer/package-usedp 'quickrun)
-        ;; NOTE: spacemacs/declare-prefix-for-mode MODE should be major-mode
-        ;; (spacemacs/declare-prefix-for-mode 'aide-mode "mr" "run")
-        (spacemacs/declare-prefix "mr" "run")
-        (spacemacs/set-leader-keys-for-minor-mode 'aide-mode
-          "rr" 'quickrun
-          "rR" 'quickrun-region
-          "ra" 'quickrun-with-arg
-          "rs" 'quickrun-shell
-          "rc" 'quickrun-compile-only
-          "rn" 'quickrun-replace-region
-          "rh" 'helm-quickrun
-          "rA" 'anything-quickrun
-          "re" 'quickrun-eval-print
-          "ra" 'quickrun-autorun-mode)))))
+;; (defun my-ide/pre-init-aide ()
+;;   (spacemacs|use-package-add-hook aide
+;;     :pre-config
+;;     (progn
+;;       (when (configuration-layer/package-usedp 'quickrun)
+;;         ;; NOTE: spacemacs/declare-prefix-for-mode MODE should be major-mode
+;;         ;; (spacemacs/declare-prefix-for-mode 'aide-mode "mr" "run")
+;;         (spacemacs/declare-prefix "mr" "run")
+;;         (spacemacs/set-leader-keys-for-minor-mode 'aide-mode
+;;           "rr" 'quickrun
+;;           "rR" 'quickrun-region
+;;           "ra" 'quickrun-with-arg
+;;           "rs" 'quickrun-shell
+;;           "rc" 'quickrun-compile-only
+;;           "rn" 'quickrun-replace-region
+;;           "rh" 'helm-quickrun
+;;           "rA" 'anything-quickrun
+;;           "re" 'quickrun-eval-print
+;;           "ra" 'quickrun-autorun-mode)))))
 
 ;; packages.el ends here
