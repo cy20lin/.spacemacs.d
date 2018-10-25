@@ -6,6 +6,7 @@ layer_metadata() {
         lang/python
         font
         app/spacemacs
+        app/kpie
         /generic/script/setup
     )
 }

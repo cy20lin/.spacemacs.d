@@ -5,6 +5,9 @@ layer_help() {
 layer_metadata() {
     LAYER_DEPENDENCIES=(
         base
+        app/git
+        app/gcc
+        app/make
     )
 }
 
@@ -14,16 +17,15 @@ layer_is_installed() {
 
 layer_install() {
 
-    # sudo apt-get install build-essential automake texinfo libjpeg-dev libncurses5-dev -y
-    # sudo apt-get install libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev -y
+    sudo apt-get install -y build-essential automake texinfo libjpeg-dev libncurses5-dev -y
+    sudo apt-get install -y libtiff5-dev libgif-dev libpng-dev libxpm-dev libgtk-3-dev libgnutls28-dev -y
 
-    # git clone https://github.com//emacs "${ARCHER_TMP}/source/emacs"
-
-    if test ! -d "${ARCHER_TMP}/source"
-    then
-       mkdir -p "${ARCHER_TMP}/source"
-       git clone https://github.com/emacs-mirror/emacs "${ARCHER_TMP}/source/emacs"
-    fi
+    # if test ! -d "${ARCHER_TMP}/source"
+    # then
+    #    mkdir -p "${ARCHER_TMP}/source"
+    #    # git clone https://github.com/emacs-mirror/emacs "${ARCHER_TMP}/source/emacs"
+    #    git clone https://github.com//emacs "${ARCHER_TMP}/source/emacs"
+    # fi
     test ! -d "${ARCHER_TMP}/archive/emacs" && mkdir -p "${ARCHER_TMP}/archive/emacs"
     pushd "${ARCHER_TMP}/archive/emacs"
     wget -O emacs.tar.gz https://github.com/emacs-mirror/emacs/tarball/00027ff9d0f646662458bdb47cc7e2214f439698
