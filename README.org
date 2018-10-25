@@ -8,9 +8,8 @@
 
   [[./doc/img/screenshot-spacemacs-exwm-3.png]]
 
-  [[./doc/img/screenshot-c++-2.png]]
   
-* Dependencies and Requirements
+* Prerequisites
   
   This configuration is used under following environment:
   
@@ -33,8 +32,8 @@
 
   Download and install [[https://github.com/cy20lin/archer/tree/c0f057822138cebfc28e41108d9779372edc99ca][Archer]].
 
-  *Archer* is the environment setup script manager used in this configuration.
-  With the help of *Archer*, one could install the dependencies and
+  Archer is the environment setup script manager used in this configuration.
+  With the help of Archer, one could install the dependencies and
   set up the environment easily.
 
   #+BEGIN_SRC shell
@@ -109,3 +108,6 @@
   - [[./layers/my-msystem/README.org][my-msystem]]
   - [[./layers/my-rtags/README.org][my-rtags]]
 
+* Other Screenshots
+
+  [[./doc/img/screenshot-c++-2.png]]
