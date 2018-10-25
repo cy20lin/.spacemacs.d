@@ -60,7 +60,7 @@
      - editres
 ***** make evil everywhere
       - need api to interact with gui (external) window.
-        - is some key is bound or not.
+        - check if some keys are bounded or not.
         - ui element loacation and functions to interact
 
 ** how emacs install packages, i have to pin packages through quelpa
@@ -80,11 +80,213 @@
     + configuration-layer//configure-packages-2 (packages)
       + configuration-layer/get-location-director
     #+BEGIN_SRC emacs-lisp
-    (with-eval-after-load 'use-package-ensure
-      ;; (setq use-package-ensure-function 'quelpa)
-      (defun my-tracing-function (name args state &optional no-refresh)
-        (message "==== ensure ==== %S %S %S" name args state))
-      (add-function :before (symbol-function 'use-package-ensure-elpa) #'my-tracing-function)
-      (setq use-package-always-ensure nil))
+      (with-eval-after-load 'use-package-ensure
+        ;; (setq use-package-ensure-function 'quelpa)
+        (defun my-tracing-function (name args state &optional no-refresh)
+          (message "==== ensure ==== %S %S %S" name args state))
+        (add-function :before (symbol-function 'use-package-ensure-elpa) #'my-tracing-function)
+        (setq use-package-always-ensure nil))
     #+END_SRC
 ** private local package issue, dotfile extra-packages :local option
+
+
+* Scratch
+** Upgrade Msys2
+   pacman -Syu
+
+** Install emacs
+
+   pacman -S emacs --needed
+   pacman -S mingw-w64-x86_64-emacs --needed
+   pacman -S git --needed
+
+** Install spacemacs
+
+   git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d/
+   pushd ~/.emacs.d/
+   git checkout develop
+   # git checkout 0fa3658cd8e283825dcd0a54ce1579dec55eb568
+   popd
+   emacs --insecure
+
+** Javascript setup
+   pacman -S mingw-w64-x86_64-nodejs --needed
+   npm install -g tern js-beautify eslint
+
+
+   /path/to/jsproject/.eslintrc.json
+
+   #+BEGIN_SRC json
+     {
+         "root": true,
+         "parserOptions": {
+             "ecmaVersion": 6,
+             "sourceType": "module",
+             "ecmaFeatures": {
+                 "jsx": true
+             }
+         },
+         "rules": {
+             "semi": ["warn"],
+             "indent": ["warn", 2],
+             "strict": ["warn", "safe"],
+             "semi-spacing":["warn"],
+             "no-undef":["warn"]
+         },
+         "env": {
+             "node": true
+         }
+     }
+   #+END_SRC
+
+   /path/to/jsproject/.tern-project
+   ~/.tern-config
+   #+BEGIN_SRC json
+     {
+         "plugins": {
+             "node": {},
+             "es_modules": {}
+         },
+         "libs": [
+             "ecma5",
+             "ecma6"
+         ],
+         "ecmaVersion": 6
+     }
+   #+END_SRC
+
+** C++ setup
+   pacboy -S gcc:x clang:x llvm:x cmake:x ggtags:x
+   cquery
+   https://github.com/syl20bnr/spacemacs/issues/10134
+   http://maskray.me/blog/2017-12-03-c++-language-server-cquery
+   https://github.com/cormacc/spacemacs/commits/cquery-layer
+
+   ref:
+   spacemacs.issue#10236
+   spacemacs.issue#10486
+   github.com/cormacc/spacemacs @branch:cquery-layer b8ae1bc
+   github.com/cormacc/spacemacs @branch:lsp-layer-improvements e65bc8d
+
+   https://github.com/syl20bnr/spacemacs/pull/10486
+   https://github.com/syl20bnr/spacemacs/pull/10236
+
+   #+BEGIN_SRC txt
+  * f68507b6 - Tue, 20 Mar 2018 00:19:49 +0000 (3 weeks ago) (origin/new-cquery-layer)
+  |           Initial commit on top of lsp-layer-improvements PR - Cormac Cannon
+  * e65bc8dc - Fri, 16 Mar 2018 00:38:24 +0000 (3 weeks ago) (origin/lsp-layer-improvements, lsp-layer-improvements)
+  |           lsp-layer configuration and building blocks for derived layers. - Cormac Cannon
+  | * 684e2b33 - Fri, 16 Mar 2018 00:33:56 +0000 (3 weeks ago) (HEAD -> cquery-layer, origin/cquery-layer)
+  | |           lsp-layer documentation updates. Renamed some utility functions - Cormac Cannon
+  | * fb260f0f - Thu, 15 Mar 2018 23:28:27 +0000 (3 weeks ago)
+  | |           Fixed lsp-ui-imenu initialisation -- keybindings weren't loaded correctly - Cormac Cannon
+  | * 8304d140 - Thu, 15 Mar 2018 14:53:32 +0000 (3 weeks ago)
+  | |           cquery - added cquery-executable config var. lsp - removed unneeded workaround - Cormac Cannon
+  | * a990192e - Thu, 15 Mar 2018 13:28:27 +0000 (3 weeks ago)
+  | |           Removed cquery footprint in c-c++ layer -- c-c++ layer. Added options. - Cormac Cannon
+  | * 87b5eb54 - Thu, 15 Mar 2018 11:41:07 +0000 (3 weeks ago)
+  | |           Stripped back and reorganised based on feedback from MaskRay - Cormac Cannon
+  | * 82bf500c - Thu, 15 Mar 2018 00:48:49 +0000 (3 weeks ago)
+  | |           Further work on keymaps. Fixed lsp-ui-peek conflict with evil-define-macro keybinding - Cormac Cannon
+  | * 08d05e46 - Wed, 14 Mar 2018 23:21:35 +0000 (3 weeks ago)
+  |/            Initial commit of cquery layer - Cormac Cannon
+  * 0fa3658c - Sun, 4 Mar 2018 20:36:40 -0500 (5 weeks ago) (origin/develop)
+  |           reorganize spacemacs-base distribution into +spacemacs/spacemacs-xxx - syl20bnr
+  * 2e8727ae - Sun, 4 Mar 2018 00:14:36 -0500 (5 weeks ago)
+  |           Fix line separation in README - syl20bnr
+   #+END_SRC
+*** setup +tools/lsp +tools/cquery on cc
+    git clone https://github.com/cormacc/spacemacs/ ~/spacemacs-cormacc
+    pushd ~/spacemacs-cormacc
+    git checkout new-cquery-layer
+    # git checkout f68507b6
+    popd
+    cp -R ~/spacemacs-cormacc/layers/+tools/cquery ~/.spacemacs.d/layers/cquery
+    cp -R ~/spacemacs-cormacc/layers/+tools/lsp ~/.spacemacs.d/layers/lsp
+*** build cquery
+
+    pacman -S make --needed
+    pacboy -S cmake:x gcc:x clang:x llvm:x ninja:x --needed
+    mkdir ~/tmp
+    cd tmp
+    # c14e562
+    git clone https://github.com/cquery-project/cquery ~/tmp/cquery
+    git checkout 7217c5e91a5e72a92b84d5c805b68f406b669d3c
+    # git checkout v20180302
+    cmake \
+    -H./tmp/cquery \
+    -B./tmp/cquery-build-system-clang/ \
+    -GUnix\ Makefiles \
+    -DCMAKE_INSTALL_PREFIX=/mingw64/local \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DSYSTEM_CLANG=ON
+    # -DSYSTEM_CLANG=(ON|OFF)
+    # -DCMAKE_BUILD_TYPE=(Debug|Release)
+    CFLAGS="-Wno-error" \
+    ./waf configure \
+    --variant=system \
+    --variant=release \
+    --prefix=/mingw64/local \
+    --llvm-config=llvm-config
+    cmake \
+    -H./tmp/cquery \
+    -B./tmp/cquery-build/ \
+    -GNinja \
+    -DCMAKE_INSTALL_PREFIX=/mingw64/local
+
+    pacman -S --needed --noconfirm mingw-w64-x86_64-clang python
+    git submodule update --init
+    cd third_party/loguru
+    git checkout master
+    cd -
+    CXXFLAGS=-g /usr/bin/python waf configure build --llvm-config llvm-config
+****  build clang+llvm 6.0.0
+     pacman -S tar
+     pacman -S svn
+
+     wget http://releases.llvm.org/6.0.0/llvm-6.0.0.src.tar.xz
+     wget http://releases.llvm.org/6.0.0/cfe-6.0.0.src.tar.xz
+     tar -xJf llvm-6.0.0.src.tar.xz
+     tar -xJf cfe-6.0.0.src.tar.xz
+     https://clang.llvm.org/get_started.html
+     http://releases.llvm.org/download.html#6.0.0
+     http://releases.llvm.org/6.0.0/llvm-6.0.0.src.tar.xz
+     http://releases.llvm.org/6.0.0/cfe-6.0.0.src.tar.xz
+     # issue on windows
+     https://github.com/heroku/heroku-slugs/issues/3
+
+** Python setup
+
+   pacman -S --needed --noconfirm \
+   mingw-w64-x86_64-python3 \
+   mingw-w64-x86_64-python3-pip
+   https://github.com/palantir/python-language-server
+   pip3 install python-language-server
+   pip3 install pyls-isort
+   pip3 install pyls-mypy
+   pip3 install pythonstyle
+   python-flake8
+   python-pylint
+   pip3 install importmagic epc
+** Shell Layer
+** Todo
+*** TODO spaceline refactor [pending]
+*** TODO align of chinese character in emacs [pending]
+*** TODO input method evil state with boshiamy & array input method implementations
+
+** Treemacs
+
+   Treemacs got some problems while trying to parse the result returned from git
+   if the directory contains files with some special characters (such as chinese characters, 中文)
+
+   issue is at file treemacs-async.el
+   in function treemacs--parse-git-status-extended
+   (read git-output)
+   treemacs--git-status-parse-function: Invalid read syntax: ". in wrong context"
+
+   (("??" . "d:/system/msys64/home/Vengis/.emacs.d/layers/+filetree/treemacs/.#README.org")("M" . "d:/system/msys64/home/Vengis/.emacs.d/layers")("M" . "d:/system/msys64/home/Vengis/.emacs.d/layers/+filetree")("M" . "d:/system/msys64/home/Vengis/.emacs.d/layers/+filetree/treemacs")("??" . "d:/system/msys64/home/Vengis/.emacs.d/"q\033\033"")("!!" . "d:/system/msys64/home/Vengis/.emacs.d/.cache")("!!" . "d:/system/msys64/home/Vengis/.emacs.d/elpa")("!!" . "d:/system/msys64/home/Vengis/.emacs.d/server"))
+
+** LSP
+   M-x lsp-capabilities
+** Flycheck
+   SPC m v

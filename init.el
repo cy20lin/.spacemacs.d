@@ -51,6 +51,7 @@ This function should only modify configuration layer settings."
                )
      ;; text-folding
      lsp
+     lua
      (my-irony :variables
                ;;
                )
@@ -166,7 +167,11 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(ox-rst)
+   dotspacemacs-additional-packages '(
+                                      exwm
+                                      xelb
+                                      ox-rst
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
