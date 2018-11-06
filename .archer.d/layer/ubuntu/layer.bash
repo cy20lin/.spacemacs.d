@@ -5,8 +5,11 @@ layer_metadata() {
         lang/javascript
         lang/python
         font
+        app/git
         app/spacemacs
         app/kpie
+        app/xephyr
+        app/sommelier
         /generic/script/setup
     )
 }
