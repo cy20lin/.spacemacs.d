@@ -684,4 +684,16 @@ before packages are loaded."
     )
   ;; allow mouse
   (setq helm-allow-mouse t)
+  ;; Define useful keys for eshell
+  (spacemacs/set-leader-keys "os" 'eshell)
+  (evil-define-key 'hybrid eshell-mode-map
+    (kbd "C-p") 'eshell-previous-matching-input-from-input
+    (kbd "C-n") 'eshell-next-matching-input-from-input
+    (kbd "C-b") 'evil-backward-char
+    (kbd "C-f") 'evil-forward-char
+    (kbd "<left>") 'evil-backward-char
+    (kbd "<right>") 'evil-forward-char
+    (kbd "M-b") 'eshell-backward-argument
+    (kbd "M-f") 'eshell-forward-argument
+    )
   )
