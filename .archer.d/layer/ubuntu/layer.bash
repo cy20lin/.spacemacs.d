@@ -10,6 +10,7 @@ layer_metadata() {
         app/kpie
         app/xephyr
         app/sommelier
+        app/chromix-too
         /generic/script/setup
     )
 }
