@@ -17,7 +17,7 @@ layer_is_installed() {
 layer_install() {
     sudo apt-get install -y libglib2.0-dev libgtk2.0-dev libwnck-dev libx11-dev liblua5.1-0-dev x11proto-core-dev
     git clone https://github.com/skx/kpie "${ARCHER_TMP}/source/kpie"
-    if test -d "${ARCHER_TMP}"
+    if test -d "${ARCHER_TMP}/build/kpie"
     then
          rm -rf "${ARCHER_TMP}/build/kpie"
     fi
