@@ -1,13 +1,10 @@
 #!/bin/sh
 
-if test -z "${DISPLAY}"
+if test -z "${EXWM_DISPLAY}"
 then
-    if test -z "${EXWM_DISPLAY}"
-    then
-        DISPLAY="${EXWM_DISPLAY}"
-    else
-        DISPLAY=:3
-    fi
+    export DISPLAY="${EXWM_DISPLAY}"
+else
+    export DISPLAY=:3
 fi
 
 emacs --eval "(progn (require 'exwm) (require 'exwm-config) (exwm-config-default))"
