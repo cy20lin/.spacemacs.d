@@ -686,6 +686,9 @@ before packages are loaded."
   (setq helm-allow-mouse t)
   ;; Define useful keys for eshell
   (spacemacs/set-leader-keys "os" 'eshell)
+  ;; FIXME:
+  ;; For some reason, keybindings would be overrided
+  ;; after some operations in eshell.
   (evil-define-key 'hybrid eshell-mode-map
     (kbd "C-p") 'eshell-previous-matching-input-from-input
     (kbd "C-n") 'eshell-next-matching-input-from-input
