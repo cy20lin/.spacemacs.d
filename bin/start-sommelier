@@ -11,4 +11,16 @@ export XDG_RUNTIME_DIR='/var/run/chrome'
 export WAYLAND_DISPLAY=wayland-0
 export DISPLAY=:0
 
-sommelier -X --x-display=:0 --display=wayland-0 --no-exit-with-child /bin/sh -c "sommelierrc"
+sommelier_predicate() {
+    SOMMELIER_DAEMON="sommelier -X --x-display=:0 --display=wayland-0 --no-exit-with-child /bin/sh -c sommelierrc"
+    ps -L u n | tr -s " " | cut -d " " -f 14- | grep "${SOMMELIER_DAEMON}" | wc -l | xargs test 2 -le
+}
+
+sommelier_daemon() {
+    if ! sommelier_predicate
+    then
+       sommelier -X --x-display=:0 --display=wayland-0 --no-exit-with-child /bin/sh -c sommelierrc
+    fi
+}
+
+sommelier_daemon
