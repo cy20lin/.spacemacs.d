@@ -50,7 +50,7 @@ end
 --
 -- This configuration file is Lua, so we can look for substrings too:
 --
-if ( string.find( window_title(), "Xephyr on :3.0" ) ) then
+if ( string.find( window_title(), "Xephyr on :3" ) ) then
   print( "Emacs is running and we like it!" )
   print( "Window Title: " .. window_title() )
   decoration()

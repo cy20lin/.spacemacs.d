@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if test -z "${EXWM_DISPLAY}"
+then
+    EXWM_DISPLAY=:3
+fi
+
+Xephyr "${EXWM_DISPLAY}" -resizeable -terminate

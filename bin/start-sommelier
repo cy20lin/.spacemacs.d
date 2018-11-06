@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# NOTE:
+# It seems that the option '--x-display' doesn't work (?).
+# It would always listen on DISPLAY=:0, no matter what value is specified.
+# So just set it to DISPLAY=:0
+
+GDK_BACKEND=wayland
+CLUTTER_BACKEND=wayland
+XDG_RUNTIME_DIR='/var/run/chrome'
+WAYLAND_DISPLAY=wayland-0
+DISPLAY=:0
+
+sommelier -X --x-display=:0 --display=wayland-0 --no-exit-with-child /bin/sh -c "sommelierrc"

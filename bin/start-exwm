@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if test -z "${DISPLAY}"
+then
+    if test -z "${EXWM_DISPLAY}"
+    then
+        DISPLAY="${EXWM_DISPLAY}"
+    else
+        DISPLAY=:3
+    fi
+fi
+
+emacs --eval "(progn (require 'exwm) (require 'exwm-config) (exwm-config-default))"
