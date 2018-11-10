@@ -9,7 +9,7 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v chromix-too
+    command -v chromix-too && command -v chrome-too-server
 }
 
 layer_install() {
