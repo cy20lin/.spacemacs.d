@@ -104,7 +104,7 @@ emacs_predicate() {
 
 # start or restart daemon
 emacs_server() {
-    ep || emacs --daemon "${@}"
+    emacs_predicate || emacs --daemon "${@}"
 }
 
 emacs_restart() {
