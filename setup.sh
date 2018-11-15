@@ -22,26 +22,39 @@ emacs_launch() {
     # TODO:
     # Should start emacs "*scratch*" buffer or bring most recent frame into focus
     # if no arguments is specified
-    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" | grep t
-    # if frame not exists
+    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" | grep t >/dev/null
+
+    new_frame_flag=
     if [ "$?" = "1" ]; then
-        # if not has display, (in console)
-        if [ "$DISPLAY" = "" ]; then
-            # create-frame and wait
-            emacsclient -c -a "" "${@}"
-        else
-            # create-frame and not wait
-            emacsclient -c -n -a "" "${@}"
-        fi
+        # if frame not exists, create new frame
+        new_frame_flag=-c
+    fi
+
+    wait_flag=
+    if [ "$DISPLAY" != "" ]; then
+        # dont wait on gui mode, just return immediately
+        wait_flag=-n
+    fi
+
+    # NOTE:
+    # (select-frame-set-input-focus (selected-frame)) ;; raise frame and set input focus
+    # (other-frame 0) ;; raise frame and set input focus
+    # (raise-frame) ;; raise frame only
+    # (switch-to-buffer "*scratch*") ;; switch to scratch buffer
+    # (toggle-frame-fullscreen) ;; to fullscreen
+    # FIXME:
+    # In gnome3 app is not allowed to steal focus,
+    # and therefore (raise-window) has no effect,
+    # gotta find a way to enable this in this environment.
+    # TODO:
+    # Make a another version of emacs_launch that doesn't steal user's focus.
+
+    # if no file argument is given,
+    # create new frame or open existing frame, and set focus to that frame.
+    if [ -z ${@} ]; then
+        emacsclient ${new_frame_flag} ${wait_flag} -a "" -e '(select-frame-set-input-focus (selected-frame))'
     else
-        # if not has display, (in console)
-        if [ "$DISPLAY" = "" ]; then
-            # use the old frame, wait
-            emacsclient -a "" "${@}"
-        else
-            # use the old frame, not wait
-            emacsclient -n -a "" "${@}"
-        fi
+        emacsclient ${new_frame_flag} ${wait_flag} -a "" "${@}"
     fi
 }
 
@@ -105,6 +118,14 @@ emacs_predicate() {
 # start or restart daemon
 emacs_server() {
     emacs_predicate || emacs --daemon "${@}"
+}
+
+# start emacs daemon in foreground
+emacs_daemon() {
+    # TODO:
+    # Wait on daemon while there is already one.
+    # Maybe exit the daemon while this program is terminated.
+    emacs_predicate || emacs --fg-daemon "${@}"
 }
 
 emacs_restart() {
