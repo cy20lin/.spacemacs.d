@@ -1,0 +1,5 @@
+#!/bin/sh
+
+. ~/.spacemacs.d/setup.sh
+
+emacs_daemon "${@}"
