@@ -22,18 +22,20 @@ emacs_launch() {
     # TODO:
     # Should start emacs "*scratch*" buffer or bring most recent frame into focus
     # if no arguments is specified
-    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" | grep t >/dev/null
+    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" | grep t 1>/dev/null 2>/dev/null
 
-    new_frame_flag=
     if [ "$?" = "1" ]; then
         # if frame not exists, create new frame
         new_frame_flag=-c
+    else
+        new_frame_flag=
     fi
 
-    wait_flag=
     if [ "$DISPLAY" != "" ]; then
         # dont wait on gui mode, just return immediately
         wait_flag=-n
+    else
+        wait_flag=
     fi
 
     # NOTE:
@@ -74,7 +76,7 @@ emacs_run() {
     # -a "" : starts emacs daemon and reattaches
     # NOTE:
     # Emacs daemon always has a visible frame called F1
-    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" | grep t
+    emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" | grep t 1>/dev/null 2>/dev/null
     # if frame not exists
     if [ "$?" = "1" ]; then
         emacsclient -c -a "" "${@}"
