@@ -97,12 +97,11 @@ This function should only modify configuration layer settings."
      html
      ;; windows-scripts
      ;; asm
-     ;; csv
-     ;; latex
+     csv
+     latex
      ;; lua
      ;; octave
-     ;; restructured-text
-     ;; markdown
+     markdown
      org
      ;; +tools/
      ;; pdf-tools
@@ -113,11 +112,11 @@ This function should only modify configuration layer settings."
      ;; NOTE: maybe make gtags layer be depended by my-c-c++ layer
      ;; ,(when (executable-find "gtags") 'gtags)
      ;; +syn
-     helm
      ;; +emacs/
+     helm
      better-defaults
      ;; +checkers/
-     ;; spell-checking
+     spell-checking
      (syntax-checking :variables
                       ;; syntax-checking-enable-tooltips nil
                       )
@@ -157,7 +156,17 @@ This function should only modify configuration layer settings."
      ;;          )
      ,(when (getenv "MSYSTEM") 'my-msystem)
      ;; my-rtags
-
+     my-themes
+     ;; NOTE:
+     ;; There is an issue when using rst-mode.
+     ;; The auto indentation get invalid behavior.
+     ;; To solve this issue, disable electric-indent-mode
+     ;; See
+     ;; https://github.com/syl20bnr/spacemacs/issues/7368
+     restructuredtext
+     (sphinx :variables
+             rst-slides-program "chromix-too file"
+             )
      )
 
    ;; List of additional packages that will be installed without being
@@ -171,6 +180,7 @@ This function should only modify configuration layer settings."
                                       exwm
                                       xelb
                                       ox-rst
+                                      helm-make
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -286,7 +296,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-responsive t
 
    ;; Default major mode of the scratch buffer (default `text-mode')
-   dotspacemacs-scratch-mode 'text-mode
+   dotspacemacs-scratch-mode 'emacs-lisp-mode
 
    ;; Initial message in the scratch buffer, such as "Welcome to Spacemacs!"
    ;; (default nil)
@@ -296,6 +306,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(darkokai
+                         dracula
+                         my-tango-dark
                          spacemacs-dark
                          spacemacs-light
                          monokai
@@ -648,18 +660,26 @@ before packages are loaded."
     (spacemacs/goto-buffer-workspace "*Messages*"))
   (spacemacs/set-leader-keys "bM" 'my-switch-to-message-buffer)
   ;;
+  (defun my-get-current-file-path (&optional arg)
+    "Get current file path."
+    (cond
+     (arg (expand-file-name default-directory))
+     ((derived-mode-p 'dired-mode) (dired-get-file-for-visit))
+     ((derived-mode-p 'neotree-mode) (or (neo-buffer--get-filename-current-line) neo-buffer--start-node))
+     ((derived-mode-p 'treemacs-mode) (let* ((btn (treemacs-current-button))
+                                             (path (if btn (button-get btn :path) nil)))
+                                        (or path (treemacs--current-root))))
+     (t (buffer-file-name))))
   (defun my-view-in-chrome ()
     (interactive)
-    (process-lines "chromix-too" "open" (concat "file://" (buffer-file-name)))
-    )
+    (process-lines "chromix-too" "file" (my-get-current-file-path)))
   (spacemacs/set-leader-keys "oc" 'my-view-in-chrome)
   (defun my-view-doc ()
     (interactive)
     (let* ((default-file (if (projectile-project-p) (concat (projectile-project-root) "doc/_build/html/index.js")))
            (file (if (and default-file (file-exists-p default-file)) default-file (buffer-file-name)))
            (url (concat "file://" file)))
-      (process-lines "chromix-too" "open" url)
-      ))
+      (process-lines "chromix-too" "file" file)))
   (spacemacs/set-leader-keys "ov" 'my-view-doc)
   (setq c-default-style '((java-mode . "java")
                           (awk-mode  . "awk")
@@ -699,4 +719,41 @@ before packages are loaded."
     (kbd "M-b") 'eshell-backward-argument
     (kbd "M-f") 'eshell-forward-argument
     )
+  ;; NOTE:
+  ;; Fix issue#7368 invalid rst-mode indention
+  ;; https://github.com/syl20bnr/spacemacs/issues/7368
+  ;; https://emacs.stackexchange.com/questions/42239/how-to-disable-all-the-minor-modes-when-a-specific-major-mode-is-enabled-with
+  (defun my-disable-electric-indent-mode ()
+    (electric-indent-local-mode -1))
+  (add-hook 'rst-mode-hook #'my-disable-electric-indent-mode)
+  ;; NOTE:
+  ;; Fix issue#9603
+  ;; https://github.com/syl20bnr/spacemacs/issues/9603
+  (add-hook 'org-mode-hook
+            (lambda()
+              (define-key evil-normal-state-local-map (kbd "M-RET") #'org-meta-return)
+              (define-key evil-insert-state-local-map (kbd "M-RET") #'org-meta-return)))
+  (with-eval-after-load 'org
+    (org-defkey org-mode-map [(meta return)] 'org-meta-return)  ;; The actual fix
+    )
+  ;; NOTE:
+  ;; evil & org has a bug when in normal-state pressing <Key o>
+  ;; trying to create a new line, It happened to invoke
+  ;; completion-at-point in the end, which is not the
+  ;; desired behavior. Fixing this issue by patching using
+  ;; advice function. Bypass completion when evil-org-open-below
+  ;; is invoked.
+  (defun my--patched-completion-at-point (fn &rest args) nil)
+  (defun my--patched-evil-org-open (fn &rest args)
+    (advice-add 'completion-at-point :around #'my--patched-completion-at-point)
+    (let ((result (apply fn args)))
+      (advice-remove 'completion-at-point #'my--patched-completion-at-point)
+      result))
+  (defun my-add-advice-evil-org-open ()
+    (advice-add 'evil-org-open-below :around #'my--patched-evil-org-open)
+    (advice-add 'evil-org-open-above :around #'my--patched-evil-org-open))
+  (defun my-remove-advice-evil-org-open ()
+    (advice-remove 'evil-org-open-below #'my--patched-evil-org-open)
+    (advice-remove 'evil-org-open-above :around #'my--patched-evil-org-open))
+  (my-add-advice-evil-org-open)
   )
