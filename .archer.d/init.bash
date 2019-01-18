@@ -2,6 +2,10 @@ is_msys2() {
     test ! -z "${MSYSTEM}"
 }
 
+is_ubuntu18() {
+    lsb_release -a 2>/dev/null | grep '^Release.*18'
+}
+
 is_ubuntu() {
     command -v apt-get 1>/dev/null
 }
@@ -14,6 +18,9 @@ dotarcher_init() {
     if is_msys2
     then
         ARCHER_LAYER_PREFIX=/msys2
+    elif is_ubuntu18
+    then
+        ARCHER_LAYER_PREFIX=/ubuntu18
     elif is_ubuntu
     then
         ARCHER_LAYER_PREFIX=/ubuntu
