@@ -7,9 +7,12 @@ layer_metadata() {
         app/gcc
         app/clang
         app/cmake
-        app/global
-        app/irony-server
+        # app/global
+        # app/irony-server
         app/cquery
+        app/make
+        app/autotools
+        app/ninja
         # app/rtags
     )
 }

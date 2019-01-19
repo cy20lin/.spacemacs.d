@@ -8,7 +8,9 @@ layer_metadata() {
 }
 
 layer_is_installed() {
-    command -v /mingw64/bin/clang /mingw64/bin/llvm-config clang-format
+    command -v /mingw64/bin/clang  && \
+    command -v /mingw64/bin/llvm-config && \
+    command -v /mingw64/bin/clang-format
 }
 
 layer_install() {

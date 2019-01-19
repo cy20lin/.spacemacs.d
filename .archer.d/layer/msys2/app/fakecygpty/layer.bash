@@ -14,10 +14,10 @@ layer_is_installed() {
 }
 
 layer_install() {
-    git clone https://github.com/d5884/fakecygpty /tmp/archer/source/fakecygpty
-    mkdir -p /tmp/archer/build
-    cp /tmp/archer/source/fakecygpty /tmp/archer/build -R
-    pushd /tmp/archer/build/fakecygpty
+    git clone https://github.com/d5884/fakecygpty "${ARCHER_TMP}/source/fakecygpty"
+    mkdir -p "${ARCHER_TMP}/build"
+    cp "${ARCHER_TMP}/source/fakecygpty" "${ARCHER_TMP}/build" -R
+    pushd "${ARCHER_TMP}/build/fakecygpty"
     git checkout 80e55da7f3292601653f0d77a6eb1b8b0f28f064
     /usr/bin/gcc -D_GNU_SOURCE -o fakecygpty fakecygpty.c
     /usr/bin/gcc -o qkill qkill.c

@@ -7,6 +7,7 @@ layer_metadata() {
         lang/c-c++
         lang/javascript
         lang/python
+        lang/restructuredtext
         app/fakecygpty
         app/spacemacs
         /generic/script/setup
